@@ -5,6 +5,8 @@ class App {
     this.soundToggle = document.getElementById("soundToggle");
     this.loadingScreen = document.querySelector(".loading-screen");
     this.soundEnabled = true;
+    this.soundsLoaded = false;
+    this.sounds = {};
     this.init();
   }
 
@@ -39,26 +41,75 @@ class App {
   }
 
   initSound() {
-    this.sounds = {
-      click: new Audio("assets/sounds/click.mp3"),
-      hover: new Audio("assets/sounds/hover.mp3"),
-      transition: new Audio("assets/sounds/transition.mp3"),
-    };
+    // Sound toggle
     this.soundToggle.addEventListener("click", () => {
       this.soundEnabled = !this.soundEnabled;
       this.soundToggle.classList.toggle("muted");
       this.soundToggle.textContent = this.soundEnabled ? "🔊" : "🔇";
 
-      // Here you would control actual sound effects if implemented
-      if (this.soundEnabled) {
+      // Initialize sounds on first interaction if not loaded
+      if (!this.soundsLoaded) {
+        this.loadSounds();
+      }
+
+      if (this.soundEnabled && this.soundsLoaded) {
         this.playSound("click");
       }
     });
+
+    // Initialize sounds on any user interaction
+    const initSoundsOnInteraction = () => {
+      if (!this.soundsLoaded) {
+        this.loadSounds();
+      }
+      // Remove listeners after first interaction
+      document.removeEventListener("click", initSoundsOnInteraction);
+      document.removeEventListener("keydown", initSoundsOnInteraction);
+    };
+
+    document.addEventListener("click", initSoundsOnInteraction);
+    document.addEventListener("keydown", initSoundsOnInteraction);
   }
+
+  loadSounds() {
+    try {
+      // Create audio objects only after user interaction
+      this.sounds = {
+        click: new Audio("assets/sounds/click.mp3"),
+        hover: new Audio("assets/sounds/hover.mp3"),
+        transition: new Audio("assets/sounds/transition.mp3"),
+      };
+
+      // Set volume to be subtle
+      Object.values(this.sounds).forEach((sound) => {
+        sound.volume = 0.3;
+      });
+
+      this.soundsLoaded = true;
+      console.log("✅ Sounds loaded successfully");
+    } catch (error) {
+      console.log("⚠️ Sound files not found (optional feature)");
+      this.soundsLoaded = false;
+    }
+  }
+
   playSound(soundName) {
-    if (this.soundEnabled && this.sounds[soundName]) {
-      this.sounds[soundName].currentTime = 0;
-      this.sounds[soundName].play();
+    // Only play if sounds are enabled, loaded, and the sound exists
+    if (this.soundEnabled && this.soundsLoaded && this.sounds[soundName]) {
+      // Create a promise to handle playback
+      const playPromise = this.sounds[soundName].play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Playback started successfully
+            this.sounds[soundName].currentTime = 0;
+          })
+          .catch((error) => {
+            // Autoplay was prevented - this is fine, just ignore
+            console.log("Sound playback prevented (browser policy)");
+          });
+      }
     }
   }
 
@@ -134,9 +185,8 @@ console.log(
   "%chttps://github.com/yourusername/portfolio",
   "font-size: 12px; color: #004e89;",
 );
-// PWA Service Worker Registration
-// Add this to the bottom of js/main.js
 
+// PWA Service Worker Registration
 // Register service worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

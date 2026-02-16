@@ -242,7 +242,7 @@ body.light-mode {
 /* Optimized Cursor Styles - Add this to your base.css or replace existing cursor styles */
 
 /* Custom Cursor */
-.cursor {
+/* .cursor {
     width: 20px;
     height: 20px;
     border: 2px solid var(--primary);
@@ -257,11 +257,19 @@ body.light-mode {
     will-change: transform;
 }
 
-.cursor.expand {
+/* .cursor.expand {
     width: 60px;
     height: 60px;
     border-color: var(--secondary);
     transition: width 0.2s ease, height 0.2s ease;
+} */
+
+/* .cursor {
+    transform: translate3d(0, 0, 0) scale(1);
+}
+
+.cursor.expand {
+    transform: scale(3);
 }
 
 .cursor-follower {
@@ -277,7 +285,40 @@ body.light-mode {
     opacity: 0.5;
     mix-blend-mode: difference;
     /* Smooth animation is handled by JavaScript */
+    /* will-change: transform; */
+/* }  */ 
+
+
+.cursor,
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
     will-change: transform;
+    mix-blend-mode: difference;
+}
+
+.cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    z-index: 10000;
+}
+
+.cursor.expand {
+    transform: scale(3);
+    border-color: var(--secondary);
+}
+
+.cursor-follower {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--secondary);
+    border-radius: 50%;
+    opacity: 0.5;
+    z-index: 9999;
 }
 
 /* Hide cursor on touch devices */
