@@ -1,0 +1,112 @@
+/* CSS Variables - Color Scheme and Theme Settings */
+
+:root {
+    /* Dark Theme Colors (Default) */
+    --primary: #ff6b35;
+    --secondary: #f7931e;
+    --accent: #004e89;
+    --dark: #1a1423;
+    --light: #f8f9fa;
+    
+    /* Background Colors */
+    --bg-primary: #1a1423;
+    --bg-secondary: rgba(255, 255, 255, 0.05);
+    
+    /* Text Colors */
+    --text-primary: #f8f9fa;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-tertiary: rgba(255, 255, 255, 0.6);
+    
+    /* Border Colors */
+    --border-primary: rgba(255, 255, 255, 0.2);
+    --border-secondary: rgba(255, 255, 255, 0.1);
+    
+    /* Input Colors */
+    --input-bg: transparent;
+    --input-border: rgba(255, 255, 255, 0.3);
+    --input-text: #f8f9fa;
+    
+    /* Card Colors */
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 107, 53, 0.2);
+    
+    /* Spacing */
+    --spacing-xs: 10px;
+    --spacing-sm: 20px;
+    --spacing-md: 40px;
+    --spacing-lg: 60px;
+    --spacing-xl: 80px;
+    
+    /* Border Radius */
+    --radius-sm: 5px;
+    --radius-md: 10px;
+    --radius-lg: 15px;
+    --radius-xl: 20px;
+    
+    /* Typography */
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Archivo', sans-serif;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.6s ease;
+}
+
+/* Light Mode Theme */
+body.light-mode {
+    /* Background Colors */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: rgba(0, 0, 0, 0.05);
+    
+    /* Text Colors */
+    --text-primary: #1a1423;
+    --text-secondary: rgba(26, 20, 35, 0.8);
+    --text-tertiary: rgba(26, 20, 35, 0.6);
+    
+    /* Border Colors */
+    --border-primary: rgba(0, 0, 0, 0.2);
+    --border-secondary: rgba(0, 0, 0, 0.1);
+    
+    /* Input Colors */
+    --input-bg: transparent;
+    --input-border: rgba(0, 0, 0, 0.3);
+    --input-text: #1a1423;
+    
+    /* Card Colors */
+    --card-bg: rgba(0, 0, 0, 0.05);
+    --card-border: rgba(255, 107, 53, 0.3);
+}
+
+/* Ensure text is always visible */
+body.light-mode * {
+    color: var(--text-primary);
+}
+
+body.light-mode .form-input {
+    color: var(--input-text);
+}
+
+body.light-mode .form-label {
+    color: var(--text-tertiary);
+}
+
+body.light-mode .form-input:focus + .form-label,
+body.light-mode .form-input:not(:placeholder-shown) + .form-label {
+    color: var(--primary);
+}
+
+body.light-mode .subtitle,
+body.light-mode .scroll-hint-text,
+body.light-mode .instructions {
+    color: var(--text-tertiary);
+}
+
+body.light-mode .card p {
+    color: white; /* Keep card text white on colored backgrounds */
+}
+
+body.light-mode .project-title,
+body.light-mode .tag {
+    color: white; /* Keep project card text white */
+}

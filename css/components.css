@@ -1,0 +1,419 @@
+/* Component Styles */
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9998;
+    transition: opacity 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    font-family: var(--font-display);
+    font-size: 80px;
+    color: var(--primary);
+    letter-spacing: 10px;
+    animation: glitch 1s infinite;
+}
+
+.loading-bar {
+    width: 300px;
+    height: 4px;
+    background: var(--border-secondary);
+    margin-top: 30px;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    width: 0%;
+    animation: loadProgress 2s ease-out forwards;
+}
+
+@keyframes loadProgress {
+    to { width: 100%; }
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-2px, -2px); }
+    80% { transform: translate(2px, 2px); }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    z-index: 1001;
+    width: 60px;
+    height: 30px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    cursor: pointer;
+    border: 2px solid var(--primary);
+    transition: all var(--transition-normal);
+}
+
+.theme-toggle::before {
+    content: '🌙';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.theme-toggle .toggle-ball {
+    width: 22px;
+    height: 22px;
+    background: var(--primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: all var(--transition-normal);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+body.light-mode .theme-toggle .toggle-ball {
+    left: 32px;
+}
+
+body.light-mode .theme-toggle::before {
+    content: '☀️';
+    left: auto;
+    right: 5px;
+}
+
+/* Sound Toggle */
+.sound-toggle {
+    position: fixed;
+    top: 90px;
+    right: 40px;
+    z-index: 1001;
+    width: 50px;
+    height: 50px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all var(--transition-normal);
+}
+
+.sound-toggle:hover {
+    background: var(--primary);
+    transform: scale(1.1);
+}
+
+.sound-toggle.muted::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 40px;
+    background: var(--primary);
+    transform: rotate(45deg);
+}
+
+/* Progress Bar */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: 1001;
+    transition: width var(--transition-normal);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+/* Scene Indicator */
+.scene-indicator {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 999;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border-primary);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.indicator-dot::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    white-space: nowrap;
+    color: var(--text-primary);
+}
+
+.indicator-dot:hover::after {
+    opacity: 1;
+}
+
+.indicator-dot.active {
+    background: var(--primary);
+    transform: scale(1.5);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+/* Navigation Sphere */
+.nav-sphere {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1000;
+}
+
+.sphere {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateSphere 20s infinite linear;
+    transition: transform var(--transition-normal);
+}
+
+.sphere:hover {
+    animation-play-state: paused;
+    transform: scale(1.1);
+}
+
+@keyframes rotateSphere {
+    from { transform: rotateY(0deg) rotateX(20deg); }
+    to { transform: rotateY(360deg) rotateX(20deg); }
+}
+
+.sphere-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.sphere-item span {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary);
+    padding: 10px 20px;
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-sm);
+    background: var(--bg-primary);
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-normal);
+}
+
+.sphere-item:hover span {
+    background: var(--primary);
+    color: var(--bg-primary);
+    transform: scale(1.2);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.sphere-item:nth-child(1) { transform: rotateY(0deg) translateZ(100px); }
+.sphere-item:nth-child(2) { transform: rotateY(90deg) translateZ(100px); }
+.sphere-item:nth-child(3) { transform: rotateY(180deg) translateZ(100px); }
+.sphere-item:nth-child(4) { transform: rotateY(270deg) translateZ(100px); }
+
+/* Instructions */
+.instructions {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: var(--text-tertiary);
+    text-align: center;
+    letter-spacing: 2px;
+    z-index: 999;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Buttons */
+.cta-btn, .flip-btn, .submit-btn {
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-family: var(--font-display);
+}
+
+.cta-btn {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border-radius: var(--radius-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.5s ease;
+}
+
+.cta-btn:hover::before {
+    left: 100%;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+}
+/* PWA Banners CSS - Add this to components.css */
+
+/* Install and Update Banners */
+.install-banner,
+.update-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.install-content,
+.update-content {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 15px 25px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+}
+
+.install-btn,
+.update-btn {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.install-btn:hover,
+.update-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dismiss-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: transform var(--transition-normal);
+}
+
+.dismiss-btn:hover {
+    transform: scale(1.2);
+}
+
+/* PWA Mode Adjustments */
+/* body.pwa-mode {
+    /* Add any specific styles for PWA mode */
+/* }  */ 
+
+body.pwa-mode .install-banner {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .install-banner,
+    .update-banner {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        transform: none;
+        width: auto;
+    }
+    
+    .install-content,
+    .update-content {
+        padding: 12px 15px;
+        font-size: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .install-btn,
+    .update-btn {
+        padding: 6px 15px;
+        font-size: 12px;
+    }
+}

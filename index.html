@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Full Stack Developer Portfolio - Showcasing creative web projects and technical skills">
+    <meta name="author" content="Your Name">
+    <title>Your Name - Developer Portfolio</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Portfolio">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
+    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+</head>
+
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">LOADING</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme" role="switch"
+        aria-pressed="false">
+        <div class="toggle-ball"></div>
+    </button>
+
+    <!-- Sound Toggle -->
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound effects" role="switch"
+        aria-pressed="true">🔊</button>
+
+    <!-- Scene Indicators -->
+    <nav class="scene-indicator" aria-label="Page navigation">
+        <button class="indicator-dot active" data-scene="0" data-label="HOME" aria-label="Go to home section"
+            aria-current="page"></button>
+        <button class="indicator-dot" data-scene="1" data-label="ABOUT" aria-label="Go to about section"></button>
+        <button class="indicator-dot" data-scene="2" data-label="PROJECTS" aria-label="Go to projects section"></button>
+        <button class="indicator-dot" data-scene="3" data-label="SKILLS" aria-label="Go to skills section"></button>
+        <button class="indicator-dot" data-scene="4" data-label="CONTACT" aria-label="Go to contact section"></button>
+    </nav>
+
+    <!-- Navigation Sphere -->
+    <nav class="nav-sphere" aria-label="3D navigation sphere">
+        <div class="sphere" role="list">
+            <button class="sphere-item" data-scene="0" role="listitem"
+                aria-label="Navigate to home"><span>HOME</span></button>
+            <button class="sphere-item" data-scene="1" role="listitem"
+                aria-label="Navigate to about"><span>ABOUT</span></button>
+            <button class="sphere-item" data-scene="2" role="listitem"
+                aria-label="Navigate to projects"><span>PROJECTS</span></button>
+            <button class="sphere-item" data-scene="3" role="listitem"
+                aria-label="Navigate to skills"><span>SKILLS</span></button>
+            <button class="sphere-item" data-scene="4" role="listitem"
+                aria-label="Navigate to contact"><span>CONTACT</span></button>
+        </div>
+    </nav>
+
+    <!-- Instructions -->
+    <div class="instructions">SCROLL, USE SPHERE, OR PRESS ARROW KEYS</div>
+
+    <!-- Horizontal Scroll Container -->
+    <main class="scroll-container" id="scrollContainer" id="main-content" role="main">
+        <!-- Home Scene -->
+        <div class="scene home-scene" data-scene="0">
+            <div class="parallax-bg parallax-circle" style="top: 10%; left: 10%;"></div>
+            <div class="parallax-bg parallax-circle" style="bottom: 20%; right: 15%;"></div>
+
+            <div class="home-title">
+                <div class="word">
+                    <span class="letter">D</span><span class="letter">E</span><span class="letter">V</span><span
+                        class="letter">E</span><span class="letter">L</span><span class="letter">O</span><span
+                        class="letter">P</span><span class="letter">E</span><span class="letter">R</span>
+                </div>
+            </div>
+            <div class="subtitle">CREATIVE TECHNOLOGIST</div>
+            <div class="cta-container">
+                <button class="cta-btn" onclick="scrollToScene(2)" aria-label="View my projects">View Projects</button>
+                <a href="assets/resume.pdf" class="cta-btn" download aria-label="Download my resume">Download Resume</a>
+                <button class="cta-btn" onclick="scrollToScene(4)" aria-label="Get in touch with me">Get In
+                    Touch</button>
+            </div>
+            <div class="scroll-hint">
+                <div class="scroll-hint-text">SCROLL</div>
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+
+        <!-- About Scene -->
+        <div class="scene about-scene" data-scene="1">
+            <div class="card-container" id="cardContainer">
+                <div class="card card-front">
+                    <h2>WHO AM I?</h2>
+                    <p>I'm a passionate software developer who believes in creating experiences, not just applications.
+                        My work sits at the intersection of design and technology.</p>
+                    <p>With 5+ years of experience, I've helped startups and enterprises build products that users love.
+                    </p>
+                    <button class="flip-btn" onclick="flipCard()">FLIP TO LEARN MORE →</button>
+                </div>
+                <div class="card card-back">
+                    <h2>WHAT I DO</h2>
+                    <p>Full-stack development with a focus on creating memorable user experiences. I specialize in
+                        React, Node.js, and modern web technologies.</p>
+                    <p>When I'm not coding, I'm exploring new design trends, experimenting with creative code, or
+                        contributing to open source.</p>
+                    <button class="flip-btn" onclick="flipCard()">← FLIP BACK</button>
+                </div>
+            </div>
+
+            <!-- GitHub Stats -->
+            <div class="github-stats" id="githubStats">
+                <h3 class="stats-title">GitHub Activity</h3>
+                <div class="stats-grid">
+                    <!-- GitHub Stats Card -->
+                    <img src="https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=radical&hide_border=true&bg_color=1a1423&title_color=ff6b35&icon_color=f7931e&text_color=ffffff"
+                        alt="GitHub Stats" loading="lazy" class="github-stat-card" />
+
+                    <!-- Top Languages Card -->
+                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=radical&hide_border=true&bg_color=1a1423&title_color=ff6b35&text_color=ffffff"
+                        alt="Top Languages" loading="lazy" class="github-stat-card" />
+
+                    <!-- GitHub Streak Stats -->
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=yourusername&theme=radical&hide_border=true&background=1a1423&ring=ff6b35&fire=f7931e&currStreakLabel=ff6b35"
+                        alt="GitHub Streak" loading="lazy" class="github-stat-card github-stat-wide" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Scene -->
+        <div class="scene projects-scene" data-scene="2">
+            <div class="projects-header">
+                <h2>FEATURED PROJECTS</h2>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be loaded from projects.js -->
+            </div>
+        </div>
+
+        <!-- Skills Scene -->
+        <div class="scene skills-scene" data-scene="3">
+            <div class="skills-container">
+                <canvas id="skillsCanvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Contact Scene -->
+        <div class="scene contact-scene" data-scene="4">
+            <div class="contact-container">
+                <h2 class="contact-title">LET'S TALK</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="name" placeholder=" " required>
+                        <label class="form-label">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" name="email" placeholder=" " required>
+                        <label class="form-label">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="subject" placeholder=" " required>
+                        <label class="form-label">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input" name="message" placeholder=" " required></textarea>
+                        <label class="form-label">Your Message</label>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span>SEND MESSAGE</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/skills.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
