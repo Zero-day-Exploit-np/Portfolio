@@ -1,175 +1,305 @@
-/* Responsive Styles */
 
+
+/*  ============================================================ */
+   RESPONSIVE STYLES - Complete Mobile Fix
+   ============================================================ */
+
+/* ============================================================
+   TABLET (max-width: 1024px)
+   ============================================================ */
 @media (max-width: 1024px) {
+
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .card-container {
+        width: 90vw;
+        height: auto;
+        min-height: 420px;
+    }
+
     .nav-sphere {
         bottom: 20px;
         right: 20px;
     }
 
     .sphere {
-        width: 120px;
-        height: 120px;
+        width: 110px;
+        height: 110px;
     }
 
     .sphere-item span {
-        font-size: 14px;
-        padding: 8px 15px;
+        font-size: 13px;
+        padding: 8px 14px;
     }
 
-    .card-container {
-        width: 90vw;
-        height: 60vh;
+    .github-stats {
+        max-width: 100%;
+        padding: 30px;
     }
 }
 
+/* ============================================================
+   MOBILE (max-width: 768px) - Main Fix
+   ============================================================ */
 @media (max-width: 768px) {
+
+    /* --- Body & Scroll --- */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* --- Scene Base --- */
     .scene {
-        padding: var(--spacing-sm);
+        padding: 15px;
+        min-width: 100vw;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        align-items: flex-start;
+        padding-top: 80px;
+        padding-bottom: 80px;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
-    }
-
-    .projects-scene {
-        padding: var(--spacing-md);
-    }
-
-    .card-container {
-        width: 90vw;
-        height: 70vh;
-    }
-
-    .card {
-        padding: var(--spacing-md);
-    }
-
-    .card h2 {
-        font-size: 42px;
-    }
-
-    .card p {
-        font-size: 16px;
-    }
-
-    .contact-container {
-        width: 90vw;
-        padding: var(--spacing-md);
-    }
-
-    .contact-title {
-        font-size: 36px;
+    /* --- HOME SCENE --- */
+    .home-scene {
+        align-items: center;
+        justify-content: center;
+        padding-top: 80px;
     }
 
     .home-title {
-        font-size: 60px;
+        font-size: clamp(48px, 14vw, 80px);
+        margin-bottom: 20px;
+        text-align: center;
     }
 
     .subtitle {
-        font-size: 16px;
-        letter-spacing: 4px;
+        font-size: 13px;
+        letter-spacing: 3px;
+        text-align: center;
+        padding: 0 20px;
     }
 
     .cta-container {
         flex-direction: column;
-        width: 100%;
+        width: 90%;
+        max-width: 300px;
+        margin-top: 25px;
+        gap: 12px;
     }
 
     .cta-btn {
         width: 100%;
+        padding: 14px 20px;
+        font-size: 16px;
+        text-align: center;
     }
 
-    .skills-container {
-        width: 90vw;
-        height: 90vw;
-        max-width: 400px;
-        max-height: 400px;
-    }
-
-    .theme-toggle, 
-    .sound-toggle {
-        right: 20px;
-    }
-
-    .sound-toggle {
-        top: 80px;
-    }
-
-    .scene-indicator {
-        top: 20px;
-    }
-
-    .instructions {
-        font-size: 12px;
-        bottom: 20px;
-    }
-
-    .nav-sphere {
+    .scroll-hint {
         bottom: 80px;
-        right: 20px;
     }
 
-    .sphere {
-        width: 100px;
-        height: 100px;
+    .parallax-bg {
+        display: none;
     }
 
-    .sphere-item span {
-        font-size: 12px;
-        padding: 6px 12px;
-    }
-
-    .projects-header h2 {
-        font-size: 48px;
-    }
-
-    .project-number {
-        font-size: 80px;
-    }
-
-    .project-title {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 480px) {
-    .home-title {
-        font-size: 48px;
-    }
-
-    .subtitle {
-        font-size: 14px;
-        letter-spacing: 2px;
+    /* --- ABOUT SCENE --- */
+    .about-scene {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 80px;
+        gap: 20px;
+        overflow-y: auto;
     }
 
     .card-container {
-        height: 60vh;
+        width: 92vw;
+        height: auto;
+        min-height: 380px;
+        flex-shrink: 0;
+    }
+
+    .card {
+        padding: 28px 22px;
+        border-radius: 15px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
     }
 
     .card h2 {
         font-size: 32px;
+        margin-bottom: 15px;
     }
 
     .card p {
         font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
     }
 
     .flip-btn {
-        font-size: 16px;
-        padding: 12px 24px;
+        font-size: 14px;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+    /* --- GITHUB STATS --- */
+    .github-stats {
+        width: 92vw;
+        padding: 20px 15px;
+        margin-top: 20px;
+        flex-shrink: 0;
+    }
+
+    .stats-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .github-stat-card {
+        width: 100%;
+        height: auto;
+    }
+
+    .github-stat-wide {
+        grid-column: 1;
+    }
+
+    /* --- PROJECTS SCENE --- */
+    .projects-scene {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 80px 15px 80px;
+        overflow-y: auto;
+    }
+
+    .projects-header {
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .projects-header h2 {
+        font-size: 36px;
+    }
+
+    .filter-container {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .filter-buttons {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .filter-btn {
+        padding: 7px 12px;
+        font-size: 11px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        width: 100%;
+    }
+
+    /* Always show project info on mobile (no hover) */
+    .project-title,
+    .project-tags,
+    .project-links {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    .project-number {
+        font-size: 60px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .project-content {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .project-title {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    .tag {
+        font-size: 9px;
+        padding: 3px 7px;
+    }
+
+    .project-links {
+        margin-top: 5px;
+        gap: 6px;
+    }
+
+    .project-link {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    /* --- SKILLS SCENE --- */
+    .skills-scene {
+        justify-content: center;
+        align-items: center;
+        padding: 80px 15px;
+    }
+
+    .skills-container {
+        width: 88vw;
+        height: 88vw;
+        max-width: 360px;
+        max-height: 360px;
+    }
+
+    /* --- CONTACT SCENE --- */
+    .contact-scene {
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 80px;
+        padding-bottom: 80px;
+        overflow-y: auto;
+    }
+
+    .contact-container {
+        width: 92vw;
+        padding: 25px 20px;
+        border-radius: 15px;
     }
 
     .contact-title {
-        font-size: 28px;
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
     }
 
     .form-input {
-        font-size: 14px;
+        font-size: 15px;
+        padding: 12px 0;
+    }
+
+    textarea.form-input {
+        min-height: 80px;
     }
 
     .submit-btn {
@@ -177,8 +307,10 @@
         padding: 15px;
     }
 
-    .projects-header h2 {
-        font-size: 36px;
+    /* --- FIXED NAVIGATION --- */
+    .scene-indicator {
+        top: 12px;
+        gap: 10px;
     }
 
     .indicator-dot {
@@ -186,60 +318,268 @@
         height: 10px;
     }
 
+    /* Hide sphere on mobile */
+    .nav-sphere {
+        display: none;
+    }
+
+    /* Theme toggle - top right */
     .theme-toggle {
-        width: 50px;
-        height: 25px;
-        top: 20px;
-        right: 15px;
+        top: 8px;
+        right: 10px;
+        width: 52px;
+        height: 26px;
     }
 
     .theme-toggle .toggle-ball {
-        width: 18px;
-        height: 18px;
+        width: 19px;
+        height: 19px;
+        top: 2px;
+        left: 2px;
     }
 
     body.light-mode .theme-toggle .toggle-ball {
-        left: 27px;
+        left: 28px;
     }
 
+    /* Sound toggle below theme */
     .sound-toggle {
-        width: 40px;
-        height: 40px;
-        top: 60px;
-        right: 15px;
-        font-size: 20px;
-    }
-}
-
-/* Tablet landscape */
-@media (max-width: 1024px) and (orientation: landscape) {
-    .card-container {
-        width: 80vw;
-        height: 80vh;
+        top: 46px;
+        right: 10px;
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
     }
 
-    .skills-container {
-        width: 70vh;
-        height: 70vh;
+    /* Hide instructions text */
+    .instructions {
+        display: none;
     }
 
-    .scroll-hint {
-        bottom: 30px;
+    /* Show mobile bottom nav */
+    .mobile-nav {
+        display: flex !important;
     }
-}
 
-/* Hide cursor on touch devices */
-@media (hover: none) and (pointer: coarse) {
+    /* Hide custom cursor */
     .cursor,
     .cursor-follower {
         display: none;
     }
 
-    body {
-        cursor: auto;
+    body { cursor: auto; }
+    * { cursor: auto !important; }
+}
+
+/* ============================================================
+   SMALL MOBILE (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+
+    .home-title {
+        font-size: clamp(38px, 16vw, 56px);
     }
 
-    * {
-        cursor: auto !important;
+    .subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .cta-btn {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+
+    .card-container {
+        min-height: 340px;
+    }
+
+    .card h2 { font-size: 26px; }
+    .card p  { font-size: 13px; }
+
+    .flip-btn {
+        font-size: 13px;
+        padding: 9px 16px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        aspect-ratio: 16/9;
+    }
+
+    .project-title { font-size: 18px; }
+
+    .contact-title { font-size: 26px; }
+    .form-input    { font-size: 14px; }
+    .submit-btn    { font-size: 16px; padding: 13px; }
+
+    .projects-header h2 { font-size: 28px; }
+
+    .stats-title { font-size: 18px; }
+
+    .indicator-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .theme-toggle {
+        top: 6px;
+        right: 8px;
+        width: 48px;
+        height: 24px;
+    }
+
+    .sound-toggle {
+        top: 40px;
+        right: 8px;
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .mobile-nav {
+        height: 55px;
+    }
+
+    .mobile-nav-btn {
+        font-size: 9px;
+    }
+
+    .mobile-nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ============================================================
+   MOBILE BOTTOM NAVIGATION BAR
+   (Replaces the sphere on mobile)
+   ============================================================ */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(26, 20, 35, 0.97);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 2px solid rgba(255, 107, 53, 0.4);
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 5px;
+    safe-area-inset-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-nav-btn {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 0;
+}
+
+.mobile-nav-btn.active {
+    color: var(--primary);
+    text-shadow: 0 0 8px var(--primary);
+}
+
+.mobile-nav-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+body.light-mode .mobile-nav {
+    background: rgba(248, 249, 250, 0.97);
+    border-top-color: rgba(255, 107, 53, 0.4);
+}
+
+body.light-mode .mobile-nav-btn {
+    color: rgba(26, 20, 35, 0.45);
+}
+
+body.light-mode .mobile-nav-btn.active {
+    color: var(--primary);
+}
+
+/* ============================================================
+   LANDSCAPE MOBILE
+   ============================================================ */
+@media (max-width: 768px) and (orientation: landscape) {
+
+    .scene {
+        padding-top: 50px;
+        padding-bottom: 65px;
+    }
+
+    .home-title { font-size: 48px; }
+
+    .card-container { min-height: 280px; }
+
+    .skills-container {
+        width: 55vh;
+        height: 55vh;
+    }
+
+    .mobile-nav { height: 50px; }
+}
+
+/* ============================================================
+   TOUCH DEVICE - Always show content (no hover required)
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+
+    .project-title,
+    .project-tags,
+    .project-links {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    .project-card::after {
+        display: none;
+    }
+
+    .project-card:hover {
+        transform: none !important;
+        box-shadow: none;
+    }
+
+    .project-card:active {
+        transform: scale(0.97) !important;
+        transition: transform 0.1s ease;
+    }
+
+    /* Larger tap targets */
+    .flip-btn,
+    .cta-btn,
+    .submit-btn,
+    .filter-btn,
+    .project-link,
+    .mobile-nav-btn {
+        min-height: 44px;
+    }
+
+    .cursor,
+    .cursor-follower {
+        display: none;
     }
 }

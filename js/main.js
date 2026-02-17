@@ -56,7 +56,6 @@ class App {
         this.playSound("click");
       }
     });
-
     // Initialize sounds on any user interaction
     const initSoundsOnInteraction = () => {
       if (!this.soundsLoaded) {
@@ -70,7 +69,6 @@ class App {
     document.addEventListener("click", initSoundsOnInteraction);
     document.addEventListener("keydown", initSoundsOnInteraction);
   }
-
   loadSounds() {
     try {
       // Create audio objects only after user interaction
@@ -92,7 +90,6 @@ class App {
       this.soundsLoaded = false;
     }
   }
-
   playSound(soundName) {
     // Only play if sounds are enabled, loaded, and the sound exists
     if (this.soundEnabled && this.soundsLoaded && this.sounds[soundName]) {
@@ -185,8 +182,9 @@ console.log(
   "%chttps://github.com/yourusername/portfolio",
   "font-size: 12px; color: #004e89;",
 );
-
 // PWA Service Worker Registration
+// Add this to the bottom of js/main.js
+
 // Register service worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

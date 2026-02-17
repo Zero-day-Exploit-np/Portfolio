@@ -14,20 +14,17 @@ A modern, feature-rich portfolio website with all the latest updates and improve
 ✅ **PWA Support** - Installable as app, works offline, appears in app drawer  
 ✅ **Sound Effects Ready** - Framework in place (just add sound files)  
 ✅ **Resume Download** - Button to download your CV  
-✅ **Light/Dark Theme** - Toggle between themes (fully working!)
+✅ **Light/Dark Theme** - Toggle between themes (fully working!)  
 
 ## 🚀 Quick Start (3 Steps!)
 
 ### 1. Customize Your Info
-
 Edit `js/config.js` and `js/projects.js`
 
 ### 2. Update GitHub Stats
-
 In `index.html`, replace `yourusername` with your GitHub username (3 places)
 
 ### 3. Test It
-
 Open `index.html` in your browser!
 
 ## 📝 To-Do Checklist
@@ -43,5 +40,3 @@ Open `index.html` in your browser!
 ## 🎉 You're Ready!
 
 Check QUICKSTART.md for detailed instructions!
-
-# Portfolio

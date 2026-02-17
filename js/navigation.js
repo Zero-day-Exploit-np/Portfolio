@@ -55,6 +55,11 @@ class Navigation {
         this.indicators.forEach((dot, index) => {
             dot.classList.toggle('active', index === this.currentScene);
         });
+
+        // Also update mobile nav buttons
+        document.querySelectorAll('.mobile-nav-btn').forEach((btn, index) => {
+            btn.classList.toggle('active', index === this.currentScene);
+        });
     }
 
     addNavigationListeners() {
@@ -70,6 +75,14 @@ class Navigation {
         this.indicators.forEach(dot => {
             dot.addEventListener('click', () => {
                 const sceneIndex = parseInt(dot.dataset.scene);
+                this.scrollToScene(sceneIndex);
+            });
+        });
+
+        // Mobile bottom nav
+        document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const sceneIndex = parseInt(btn.dataset.scene);
                 this.scrollToScene(sceneIndex);
             });
         });

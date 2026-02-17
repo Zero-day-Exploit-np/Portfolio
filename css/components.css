@@ -384,9 +384,9 @@ body.light-mode .theme-toggle::before {
 }
 
 /* PWA Mode Adjustments */
-/* body.pwa-mode {
+body.pwa-mode {
     /* Add any specific styles for PWA mode */
-/* }  */ 
+}
 
 body.pwa-mode .install-banner {
     display: none;

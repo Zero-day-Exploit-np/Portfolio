@@ -57,16 +57,8 @@ class CustomCursor {
       this.followerPos.y += (this.targetPos.y - this.followerPos.y) * 0.15;
 
       // Apply transforms (more performant than left/top)
-      // this.cursor.style.transform = `translate(${this.cursorPos.x}px, ${this.cursorPos.y}px)`;
-      // this.follower.style.transform = `translate(${this.followerPos.x}px, ${this.followerPos.y}px)`;
-      // this.cursor.style.transform = `translate3d(${this.cursorPos.x - 10}px, ${this.cursorPos.y - 10}px, 0)`;
-      // this.follower.style.transform = `translate3d(${this.followerPos.x - 20}px, ${this.followerPos.y - 20}px, 0)`;
-      const CURSOR_RADIUS = 10;
-      const FOLLOWER_RADIUS = 20;
-
-      this.cursor.style.transform = `translate3d(${this.cursorPos.x - CURSOR_RADIUS}px, ${this.cursorPos.y - CURSOR_RADIUS}px, 0)`;
-
-      this.follower.style.transform = `translate3d(${this.followerPos.x - FOLLOWER_RADIUS}px, ${this.followerPos.y - FOLLOWER_RADIUS}px, 0)`;
+      this.cursor.style.transform = `translate(${this.cursorPos.x}px, ${this.cursorPos.y}px)`;
+      this.follower.style.transform = `translate(${this.followerPos.x}px, ${this.followerPos.y}px)`;
 
       requestAnimationFrame(animate);
     };

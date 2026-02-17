@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Full Stack Developer Portfolio - Showcasing creative web projects and technical skills">
+    <meta name="description" content="Full Stack Developer Portfolio - Showcasing creative web projects and technical skills">
     <meta name="author" content="Your Name">
     <title>Your Name - Developer Portfolio</title>
-
+    
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@300;400;600;800&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/sections.css">
     <link rel="stylesheet" href="css/responsive.css">
-
+    
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#ff6b35">
@@ -27,13 +24,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Portfolio">
-
+    
     <!-- Icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
     <link rel="apple-touch-icon" href="assets/images/icon-192.png">
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 </head>
-
 <body>
     <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -56,19 +52,16 @@
     </div>
 
     <!-- Theme Toggle -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme" role="switch"
-        aria-pressed="false">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme" role="switch" aria-pressed="false">
         <div class="toggle-ball"></div>
     </button>
 
     <!-- Sound Toggle -->
-    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound effects" role="switch"
-        aria-pressed="true">🔊</button>
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound effects" role="switch" aria-pressed="true">🔊</button>
 
     <!-- Scene Indicators -->
     <nav class="scene-indicator" aria-label="Page navigation">
-        <button class="indicator-dot active" data-scene="0" data-label="HOME" aria-label="Go to home section"
-            aria-current="page"></button>
+        <button class="indicator-dot active" data-scene="0" data-label="HOME" aria-label="Go to home section" aria-current="page"></button>
         <button class="indicator-dot" data-scene="1" data-label="ABOUT" aria-label="Go to about section"></button>
         <button class="indicator-dot" data-scene="2" data-label="PROJECTS" aria-label="Go to projects section"></button>
         <button class="indicator-dot" data-scene="3" data-label="SKILLS" aria-label="Go to skills section"></button>
@@ -78,16 +71,11 @@
     <!-- Navigation Sphere -->
     <nav class="nav-sphere" aria-label="3D navigation sphere">
         <div class="sphere" role="list">
-            <button class="sphere-item" data-scene="0" role="listitem"
-                aria-label="Navigate to home"><span>HOME</span></button>
-            <button class="sphere-item" data-scene="1" role="listitem"
-                aria-label="Navigate to about"><span>ABOUT</span></button>
-            <button class="sphere-item" data-scene="2" role="listitem"
-                aria-label="Navigate to projects"><span>PROJECTS</span></button>
-            <button class="sphere-item" data-scene="3" role="listitem"
-                aria-label="Navigate to skills"><span>SKILLS</span></button>
-            <button class="sphere-item" data-scene="4" role="listitem"
-                aria-label="Navigate to contact"><span>CONTACT</span></button>
+            <button class="sphere-item" data-scene="0" role="listitem" aria-label="Navigate to home"><span>HOME</span></button>
+            <button class="sphere-item" data-scene="1" role="listitem" aria-label="Navigate to about"><span>ABOUT</span></button>
+            <button class="sphere-item" data-scene="2" role="listitem" aria-label="Navigate to projects"><span>PROJECTS</span></button>
+            <button class="sphere-item" data-scene="3" role="listitem" aria-label="Navigate to skills"><span>SKILLS</span></button>
+            <button class="sphere-item" data-scene="4" role="listitem" aria-label="Navigate to contact"><span>CONTACT</span></button>
         </div>
     </nav>
 
@@ -100,20 +88,17 @@
         <div class="scene home-scene" data-scene="0">
             <div class="parallax-bg parallax-circle" style="top: 10%; left: 10%;"></div>
             <div class="parallax-bg parallax-circle" style="bottom: 20%; right: 15%;"></div>
-
+            
             <div class="home-title">
                 <div class="word">
-                    <span class="letter">D</span><span class="letter">E</span><span class="letter">V</span><span
-                        class="letter">E</span><span class="letter">L</span><span class="letter">O</span><span
-                        class="letter">P</span><span class="letter">E</span><span class="letter">R</span>
+                    <span class="letter">D</span><span class="letter">E</span><span class="letter">V</span><span class="letter">E</span><span class="letter">L</span><span class="letter">O</span><span class="letter">P</span><span class="letter">E</span><span class="letter">R</span>
                 </div>
             </div>
             <div class="subtitle">CREATIVE TECHNOLOGIST</div>
             <div class="cta-container">
                 <button class="cta-btn" onclick="scrollToScene(2)" aria-label="View my projects">View Projects</button>
                 <a href="assets/resume.pdf" class="cta-btn" download aria-label="Download my resume">Download Resume</a>
-                <button class="cta-btn" onclick="scrollToScene(4)" aria-label="Get in touch with me">Get In
-                    Touch</button>
+                <button class="cta-btn" onclick="scrollToScene(4)" aria-label="Get in touch with me">Get In Touch</button>
             </div>
             <div class="scroll-hint">
                 <div class="scroll-hint-text">SCROLL</div>
@@ -126,37 +111,45 @@
             <div class="card-container" id="cardContainer">
                 <div class="card card-front">
                     <h2>WHO AM I?</h2>
-                    <p>I'm a passionate software developer who believes in creating experiences, not just applications.
-                        My work sits at the intersection of design and technology.</p>
-                    <p>With 5+ years of experience, I've helped startups and enterprises build products that users love.
-                    </p>
+                    <p>I'm a passionate software developer who believes in creating experiences, not just applications. My work sits at the intersection of design and technology.</p>
+                    <p>With 5+ years of experience, I've helped startups and enterprises build products that users love.</p>
                     <button class="flip-btn" onclick="flipCard()">FLIP TO LEARN MORE →</button>
                 </div>
                 <div class="card card-back">
                     <h2>WHAT I DO</h2>
-                    <p>Full-stack development with a focus on creating memorable user experiences. I specialize in
-                        React, Node.js, and modern web technologies.</p>
-                    <p>When I'm not coding, I'm exploring new design trends, experimenting with creative code, or
-                        contributing to open source.</p>
+                    <p>Full-stack development with a focus on creating memorable user experiences. I specialize in React, Node.js, and modern web technologies.</p>
+                    <p>When I'm not coding, I'm exploring new design trends, experimenting with creative code, or contributing to open source.</p>
                     <button class="flip-btn" onclick="flipCard()">← FLIP BACK</button>
                 </div>
             </div>
-
+            
             <!-- GitHub Stats -->
             <div class="github-stats" id="githubStats">
                 <h3 class="stats-title">GitHub Activity</h3>
                 <div class="stats-grid">
                     <!-- GitHub Stats Card -->
-                    <img src="https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=radical&hide_border=true&bg_color=1a1423&title_color=ff6b35&icon_color=f7931e&text_color=ffffff"
-                        alt="GitHub Stats" loading="lazy" class="github-stat-card" />
-
+                    <img 
+                        src="https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=radical&hide_border=true&bg_color=1a1423&title_color=ff6b35&icon_color=f7931e&text_color=ffffff"
+                        alt="GitHub Stats"
+                        loading="lazy"
+                        class="github-stat-card"
+                    />
+                    
                     <!-- Top Languages Card -->
-                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=radical&hide_border=true&bg_color=1a1423&title_color=ff6b35&text_color=ffffff"
-                        alt="Top Languages" loading="lazy" class="github-stat-card" />
-
+                    <img 
+                        src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=radical&hide_border=true&bg_color=1a1423&title_color=ff6b35&text_color=ffffff"
+                        alt="Top Languages"
+                        loading="lazy"
+                        class="github-stat-card"
+                    />
+                    
                     <!-- GitHub Streak Stats -->
-                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=yourusername&theme=radical&hide_border=true&background=1a1423&ring=ff6b35&fire=f7931e&currStreakLabel=ff6b35"
-                        alt="GitHub Streak" loading="lazy" class="github-stat-card github-stat-wide" />
+                    <img 
+                        src="https://github-readme-streak-stats.herokuapp.com/?user=yourusername&theme=radical&hide_border=true&background=1a1423&ring=ff6b35&fire=f7931e&currStreakLabel=ff6b35"
+                        alt="GitHub Streak"
+                        loading="lazy"
+                        class="github-stat-card github-stat-wide"
+                    />
                 </div>
             </div>
         </div>
@@ -207,6 +200,30 @@
         </div>
     </main>
 
+    <!-- Mobile Bottom Navigation (shows only on mobile) -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <button class="mobile-nav-btn active" data-scene="0" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            HOME
+        </button>
+        <button class="mobile-nav-btn" data-scene="1" aria-label="About">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            ABOUT
+        </button>
+        <button class="mobile-nav-btn" data-scene="2" aria-label="Projects">
+            <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.33C18 2.1 15.9 0 13.33 0c-1.32 0-2.5.54-3.33 1.43C9.17.54 8 0 6.67 0 4.1 0 2 2.1 2 4.67c0 .45.11.89.18 1.33H0v14h24V6h-4zM13.33 2c1.47 0 2.67 1.2 2.67 2.67 0 1.46-1.2 2.66-2.67 2.66H12V4.67C12 3.2 12.87 2 13.33 2zM6.67 2C7.13 2 8 3.2 8 4.67V7.33H6.67C5.2 7.33 4 6.13 4 4.67 4 3.2 5.2 2 6.67 2zM2 18V8h8v10H2zm10 0V8h10v10H12z"/></svg>
+            PROJECTS
+        </button>
+        <button class="mobile-nav-btn" data-scene="3" aria-label="Skills">
+            <svg viewBox="0 0 24 24"><path d="M19.64 6.06L17.5 3.94 15.64 5.8A8.003 8.003 0 0 0 4 12c0 4.42 3.58 8 8 8s8-3.58 8-8c0-2.15-.85-4.1-2.21-5.54l1.85-1.4zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+            SKILLS
+        </button>
+        <button class="mobile-nav-btn" data-scene="4" aria-label="Contact">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            CONTACT
+        </button>
+    </nav>
+
     <!-- Scripts -->
     <script src="js/config.js"></script>
     <script src="js/projects.js"></script>
@@ -217,5 +234,4 @@
     <script src="js/form.js"></script>
     <script src="js/main.js"></script>
 </body>
-
 </html>
