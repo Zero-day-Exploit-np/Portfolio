@@ -10,10 +10,18 @@ body {
     font-family: var(--font-body);
     background: var(--bg-primary);
     color: var(--text-primary);
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
     cursor: none;
     transition: background-color var(--transition-normal), color var(--transition-normal);
+    /* Fix Chrome Android 100vh issue */
+    height: 100%;
+    width: 100%;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* Particle Canvas */
@@ -28,23 +36,28 @@ body {
     opacity: 0.6;
 }
 
-/* Custom Cursor */
+/* =============================================
+   CURSOR (Desktop only)
+   ============================================= */
 .cursor {
     width: 20px;
     height: 20px;
     border: 2px solid var(--primary);
     border-radius: 50%;
     position: fixed;
+    top: 0;
+    left: 0;
     pointer-events: none;
     z-index: 10000;
-    transition: all 0.1s ease;
     mix-blend-mode: difference;
+    will-change: transform;
 }
 
 .cursor.expand {
     width: 60px;
     height: 60px;
     border-color: var(--secondary);
+    transition: width 0.2s ease, height 0.2s ease;
 }
 
 .cursor-follower {
@@ -53,17 +66,23 @@ body {
     border: 1px solid var(--secondary);
     border-radius: 50%;
     position: fixed;
+    top: 9px;
+    left: 10px;
     pointer-events: none;
     z-index: 9999;
-    transition: all 0.2s ease;
     opacity: 0.5;
     mix-blend-mode: difference;
+    will-change: transform;
 }
 
-/* Horizontal Scroll Container */
+/* =============================================
+   HORIZONTAL SCROLL CONTAINER
+   ============================================= */
 .scroll-container {
     width: 100vw;
+    /* Use dvh (dynamic viewport height) - fixes Chrome Android address bar issue */
     height: 100vh;
+    height: 100dvh;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -71,10 +90,13 @@ body {
     display: flex;
     position: relative;
     z-index: 1;
+    /* Prevent content leak on Chrome Android */
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 .scroll-container::-webkit-scrollbar {
-    height: 8px;
+    height: 4px;
 }
 
 .scroll-container::-webkit-scrollbar-track {
@@ -90,19 +112,30 @@ body {
     background: var(--secondary);
 }
 
-/* Scene Styles */
+/* =============================================
+   SCENE BASE
+   ============================================= */
 .scene {
     min-width: 100vw;
+    width: 100vw;
+    /* Use dvh for Chrome Android compatibility */
     height: 100vh;
+    height: 100dvh;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     padding: var(--spacing-md);
+    /* Prevent overflow leaking into adjacent scenes */
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-/* Parallax Background Elements */
+/* =============================================
+   PARALLAX BACKGROUND
+   ============================================= */
 .parallax-bg {
     position: absolute;
     pointer-events: none;
@@ -115,9 +148,10 @@ body {
     border-radius: 50%;
     border: 2px solid var(--primary);
 }
-/* Accessibility CSS - Add this to base.css */
 
-/* Skip Link for keyboard navigation */
+/* =============================================
+   ACCESSIBILITY
+   ============================================= */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -135,7 +169,6 @@ body {
     top: 0;
 }
 
-/* Screen reader only text */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -148,29 +181,7 @@ body {
     border-width: 0;
 }
 
-/* Focus styles for keyboard navigation */
-*:focus {
-    outline: 3px solid var(--primary);
-    outline-offset: 2px;
-}
-
-button:focus,
-a:focus,
-input:focus,
-textarea:focus {
-    outline: 3px solid var(--primary);
-    outline-offset: 2px;
-}
-
-/* Better focus for custom elements */
-.sphere-item:focus span,
-.indicator-dot:focus,
-.project-card:focus {
-    outline: 3px solid var(--primary);
-    outline-offset: 2px;
-}
-
-/* Remove outline for mouse users (keeps it for keyboard) */
+/* Focus styles */
 *:focus:not(:focus-visible) {
     outline: none;
 }
@@ -180,13 +191,21 @@ textarea:focus {
     outline-offset: 2px;
 }
 
-/* High contrast mode support */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
 @media (prefers-contrast: high) {
     :root {
         --primary: #ff8c00;
         --border-primary: rgba(255, 255, 255, 0.5);
     }
-    
+
     .project-card,
     .card,
     .contact-container {
@@ -194,23 +213,16 @@ textarea:focus {
     }
 }
 
-/* Reduced motion support */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-    
-    .sphere {
-        animation: none;
-    }
-    
-    .scroll-container {
-        scroll-behavior: auto;
-    }
+
+    .sphere { animation: none; }
+    .scroll-container { scroll-behavior: auto; }
 }
 
 /* Better color contrast for text */
@@ -219,65 +231,10 @@ body.light-mode {
     --text-secondary: #2a2435;
 }
 
-/* Ensure sufficient contrast ratios */
 .tag,
 .project-link {
     background: rgba(255, 255, 255, 0.2);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-/* Live region for announcements */
-.sr-live {
-    position: absolute;
-    left: -10000px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
-
-[aria-live="polite"] {
-    position: absolute;
-    left: -10000px;
-}
-/* Optimized Cursor Styles - Add this to your base.css or replace existing cursor styles */
-
-/* Custom Cursor */
-.cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary);
-    border-radius: 50%;
-    position: fixed;
-    top: 9px;
-    left: 10px;
-    pointer-events: none;
-    z-index: 10000;
-    mix-blend-mode: difference;
-    /* Remove transition for instant response */
-    will-change: transform;
-}
-
-.cursor.expand {
-    width: 60px;
-    height: 60px;
-    border-color: var(--secondary);
-    transition: width 0.2s ease, height 0.2s ease;
-}
-
-.cursor-follower {
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--secondary);
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.5;
-    mix-blend-mode: difference;
-    /* Smooth animation is handled by JavaScript */
-    will-change: transform;
 }
 
 /* Hide cursor on touch devices */
@@ -285,5 +242,9 @@ body.light-mode {
     .cursor,
     .cursor-follower {
         display: none;
+    }
+
+    body {
+        cursor: auto;
     }
 }

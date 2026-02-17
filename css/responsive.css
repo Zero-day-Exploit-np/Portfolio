@@ -1,7 +1,5 @@
-
-
-/*  ============================================================ */
-   RESPONSIVE STYLES - Complete Mobile Fix
+/* ============================================================
+   RESPONSIVE STYLES - Chrome Android Fixed
    ============================================================ */
 
 /* ============================================================
@@ -33,68 +31,90 @@
         font-size: 13px;
         padding: 8px 14px;
     }
-
-    .github-stats {
-        max-width: 100%;
-        padding: 30px;
-    }
 }
 
 /* ============================================================
-   MOBILE (max-width: 768px) - Main Fix
+   MOBILE (max-width: 768px)
+   Chrome Android specific fixes
    ============================================================ */
 @media (max-width: 768px) {
 
-    /* --- Body & Scroll --- */
-    body {
-        overflow-x: hidden;
+    /* ---- Critical Chrome Android Fix ---- */
+    html, body {
+        /* Prevent body from scrolling behind the fixed elements */
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
     }
 
-    /* --- Scene Base --- */
-    .scene {
-        padding: 15px;
-        min-width: 100vw;
+    .scroll-container {
+        /* Use dvh so Chrome's address bar doesn't cause overflow */
         height: 100vh;
-        overflow-y: auto;
-        overflow-x: hidden;
-        align-items: flex-start;
-        padding-top: 80px;
-        padding-bottom: 80px;
+        height: 100dvh;
+        /* Ensure snap still works on Chrome mobile */
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
     }
 
-    /* --- HOME SCENE --- */
-    .home-scene {
+    /* ---- Scene: allow internal vertical scroll ---- */
+    .scene {
+        min-width: 100vw;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        /* Each scene scrolls vertically inside itself */
+        overflow-x: hidden;
+        overflow-y: auto;
+        /* Keep horizontal snap working */
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
+        padding: 75px 15px 70px;
+        /* Prevent content from leaking out */
+        contain: layout style;
+    }
+
+    /* ---- HOME SCENE ---- */
+    .home-scene {
         justify-content: center;
-        padding-top: 80px;
+        padding-top: 60px;
     }
 
     .home-title {
-        font-size: clamp(48px, 14vw, 80px);
-        margin-bottom: 20px;
+        font-size: clamp(46px, 13vw, 76px);
+        margin-bottom: 16px;
         text-align: center;
+        width: 100%;
     }
 
     .subtitle {
-        font-size: 13px;
+        font-size: 12px;
         letter-spacing: 3px;
         text-align: center;
         padding: 0 20px;
+        width: 100%;
     }
 
     .cta-container {
         flex-direction: column;
-        width: 90%;
-        max-width: 300px;
-        margin-top: 25px;
-        gap: 12px;
+        width: 88%;
+        max-width: 280px;
+        margin-top: 24px;
+        gap: 10px;
     }
 
     .cta-btn {
         width: 100%;
-        padding: 14px 20px;
-        font-size: 16px;
+        padding: 13px 16px;
+        font-size: 15px;
         text-align: center;
+        display: block;
     }
 
     .scroll-hint {
@@ -105,117 +125,117 @@
         display: none;
     }
 
-    /* --- ABOUT SCENE --- */
+    /* ---- ABOUT SCENE ---- */
     .about-scene {
-        flex-direction: column;
         justify-content: flex-start;
-        align-items: center;
-        padding-top: 80px;
         gap: 20px;
-        overflow-y: auto;
     }
 
     .card-container {
-        width: 92vw;
-        height: auto;
-        min-height: 380px;
+        width: 92%;
+        /* Fixed height so it doesn't overflow */
+        height: 360px;
+        min-height: unset;
         flex-shrink: 0;
+        /* Make sure 3D flip works */
+        transform-style: preserve-3d;
     }
 
     .card {
-        padding: 28px 22px;
-        border-radius: 15px;
+        padding: 26px 22px;
+        border-radius: 14px;
+        /* Both front & back are absolutely positioned inside container */
         position: absolute;
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
 
     .card h2 {
-        font-size: 32px;
-        margin-bottom: 15px;
+        font-size: 30px;
+        margin-bottom: 14px;
     }
 
     .card p {
         font-size: 14px;
-        line-height: 1.7;
-        margin-bottom: 12px;
+        line-height: 1.65;
+        margin-bottom: 10px;
     }
 
     .flip-btn {
-        font-size: 14px;
-        padding: 10px 20px;
-        margin-top: 10px;
+        font-size: 13px;
+        padding: 10px 18px;
+        margin-top: 8px;
     }
 
-    /* --- GITHUB STATS --- */
+    /* ---- GITHUB STATS ---- */
     .github-stats {
-        width: 92vw;
-        padding: 20px 15px;
-        margin-top: 20px;
+        width: 92%;
+        padding: 18px 14px;
+        margin-top: 16px;
         flex-shrink: 0;
     }
 
     .stats-title {
-        font-size: 24px;
-        margin-bottom: 15px;
+        font-size: 22px;
+        margin-bottom: 14px;
     }
 
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 10px;
     }
 
     .github-stat-card {
         width: 100%;
         height: auto;
+        display: block;
     }
 
     .github-stat-wide {
         grid-column: 1;
     }
 
-    /* --- PROJECTS SCENE --- */
+    /* ---- PROJECTS SCENE ---- */
     .projects-scene {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 80px 15px 80px;
-        overflow-y: auto;
+        padding: 75px 12px 70px;
     }
 
     .projects-header {
-        margin-bottom: 15px;
         width: 100%;
         text-align: center;
+        margin-bottom: 12px;
+        flex-shrink: 0;
     }
 
     .projects-header h2 {
-        font-size: 36px;
+        font-size: 34px;
     }
 
     .filter-container {
-        margin-top: 10px;
-        margin-bottom: 5px;
         width: 100%;
+        margin-bottom: 10px;
+        flex-shrink: 0;
     }
 
     .filter-buttons {
-        gap: 8px;
+        gap: 7px;
         padding: 10px;
+        flex-wrap: wrap;
     }
 
     .filter-btn {
-        padding: 7px 12px;
+        padding: 6px 12px;
         font-size: 11px;
     }
 
     .projects-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 10px;
         width: 100%;
     }
 
-    /* Always show project info on mobile (no hover) */
+    /* Always show content on mobile */
     .project-title,
     .project-tags,
     .project-links {
@@ -223,16 +243,20 @@
         transform: translateY(0) !important;
     }
 
+    .project-card::after {
+        display: none;
+    }
+
     .project-number {
-        font-size: 60px;
-        top: 10px;
-        left: 10px;
+        font-size: 55px;
+        top: 8px;
+        left: 8px;
     }
 
     .project-content {
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
+        bottom: 8px;
+        left: 8px;
+        right: 8px;
     }
 
     .project-title {
@@ -242,75 +266,75 @@
 
     .tag {
         font-size: 9px;
-        padding: 3px 7px;
+        padding: 3px 6px;
     }
 
     .project-links {
-        margin-top: 5px;
-        gap: 6px;
+        margin-top: 4px;
+        gap: 5px;
     }
 
     .project-link {
         font-size: 10px;
-        padding: 4px 8px;
+        padding: 3px 7px;
     }
 
-    /* --- SKILLS SCENE --- */
+    /* ---- SKILLS SCENE ---- */
     .skills-scene {
         justify-content: center;
-        align-items: center;
-        padding: 80px 15px;
+        padding-top: 75px;
     }
 
     .skills-container {
-        width: 88vw;
-        height: 88vw;
-        max-width: 360px;
-        max-height: 360px;
+        width: 86vw;
+        height: 86vw;
+        max-width: 340px;
+        max-height: 340px;
     }
 
-    /* --- CONTACT SCENE --- */
+    /* ---- CONTACT SCENE ---- */
     .contact-scene {
-        align-items: center;
+        padding: 75px 15px 70px;
         justify-content: flex-start;
-        padding-top: 80px;
-        padding-bottom: 80px;
-        overflow-y: auto;
     }
 
     .contact-container {
-        width: 92vw;
-        padding: 25px 20px;
-        border-radius: 15px;
+        width: 92%;
+        padding: 24px 18px;
+        border-radius: 14px;
     }
 
     .contact-title {
-        font-size: 32px;
-        margin-bottom: 25px;
+        font-size: 30px;
+        margin-bottom: 22px;
     }
 
     .form-group {
-        margin-bottom: 22px;
+        margin-bottom: 20px;
     }
 
     .form-input {
         font-size: 15px;
-        padding: 12px 0;
+        padding: 11px 0;
     }
 
     textarea.form-input {
-        min-height: 80px;
+        min-height: 75px;
     }
 
     .submit-btn {
-        font-size: 18px;
-        padding: 15px;
+        font-size: 17px;
+        padding: 14px;
     }
 
-    /* --- FIXED NAVIGATION --- */
+    /* ---- FIXED CONTROLS ---- */
     .scene-indicator {
         top: 12px;
         gap: 10px;
+        /* Center between toggles */
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
     }
 
     .indicator-dot {
@@ -318,17 +342,19 @@
         height: 10px;
     }
 
-    /* Hide sphere on mobile */
+    /* Hide sphere */
     .nav-sphere {
         display: none;
     }
 
-    /* Theme toggle - top right */
+    /* Theme toggle */
     .theme-toggle {
+        position: fixed;
         top: 8px;
         right: 10px;
         width: 52px;
         height: 26px;
+        z-index: 1001;
     }
 
     .theme-toggle .toggle-ball {
@@ -342,16 +368,18 @@
         left: 28px;
     }
 
-    /* Sound toggle below theme */
+    /* Sound toggle */
     .sound-toggle {
+        position: fixed;
         top: 46px;
         right: 10px;
         width: 38px;
         height: 38px;
         font-size: 18px;
+        z-index: 1001;
     }
 
-    /* Hide instructions text */
+    /* Hide instructions */
     .instructions {
         display: none;
     }
@@ -366,9 +394,6 @@
     .cursor-follower {
         display: none;
     }
-
-    body { cursor: auto; }
-    * { cursor: auto !important; }
 }
 
 /* ============================================================
@@ -377,7 +402,7 @@
 @media (max-width: 480px) {
 
     .home-title {
-        font-size: clamp(38px, 16vw, 56px);
+        font-size: clamp(36px, 15vw, 52px);
     }
 
     .subtitle {
@@ -385,22 +410,12 @@
         letter-spacing: 2px;
     }
 
-    .cta-btn {
-        font-size: 14px;
-        padding: 12px 16px;
-    }
-
     .card-container {
-        min-height: 340px;
+        height: 320px;
     }
 
     .card h2 { font-size: 26px; }
     .card p  { font-size: 13px; }
-
-    .flip-btn {
-        font-size: 13px;
-        padding: 9px 16px;
-    }
 
     .projects-grid {
         grid-template-columns: 1fr;
@@ -410,53 +425,18 @@
         aspect-ratio: 16/9;
     }
 
-    .project-title { font-size: 18px; }
-
     .contact-title { font-size: 26px; }
-    .form-input    { font-size: 14px; }
-    .submit-btn    { font-size: 16px; padding: 13px; }
-
+    .submit-btn    { font-size: 15px; padding: 13px; }
     .projects-header h2 { font-size: 28px; }
-
-    .stats-title { font-size: 18px; }
 
     .indicator-dot {
         width: 8px;
         height: 8px;
     }
-
-    .theme-toggle {
-        top: 6px;
-        right: 8px;
-        width: 48px;
-        height: 24px;
-    }
-
-    .sound-toggle {
-        top: 40px;
-        right: 8px;
-        width: 34px;
-        height: 34px;
-        font-size: 16px;
-    }
-
-    .mobile-nav {
-        height: 55px;
-    }
-
-    .mobile-nav-btn {
-        font-size: 9px;
-    }
-
-    .mobile-nav-btn svg {
-        width: 18px;
-        height: 18px;
-    }
 }
 
 /* ============================================================
-   MOBILE BOTTOM NAVIGATION BAR
-   (Replaces the sphere on mobile)
+   MOBILE BOTTOM NAVIGATION
    ============================================================ */
 .mobile-nav {
     display: none;
@@ -464,7 +444,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 58px;
     background: rgba(26, 20, 35, 0.97);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -472,9 +452,7 @@
     z-index: 1000;
     justify-content: space-around;
     align-items: center;
-    padding: 0 5px;
-    safe-area-inset-bottom: env(safe-area-inset-bottom);
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .mobile-nav-btn {
@@ -484,16 +462,17 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 3px;
+    gap: 2px;
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.45);
     font-family: var(--font-display);
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: color 0.2s ease;
     padding: 0;
+    min-height: 44px;
 }
 
 .mobile-nav-btn.active {
@@ -502,8 +481,8 @@
 }
 
 .mobile-nav-btn svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     fill: currentColor;
 }
 
@@ -526,24 +505,23 @@ body.light-mode .mobile-nav-btn.active {
 @media (max-width: 768px) and (orientation: landscape) {
 
     .scene {
-        padding-top: 50px;
-        padding-bottom: 65px;
+        padding-top: 48px;
+        padding-bottom: 58px;
     }
 
-    .home-title { font-size: 48px; }
-
-    .card-container { min-height: 280px; }
+    .home-title { font-size: 42px; }
+    .card-container { height: 260px; }
 
     .skills-container {
-        width: 55vh;
-        height: 55vh;
+        width: 52vh;
+        height: 52vh;
     }
 
-    .mobile-nav { height: 50px; }
+    .mobile-nav { height: 48px; }
 }
 
 /* ============================================================
-   TOUCH DEVICE - Always show content (no hover required)
+   TOUCH DEVICE
    ============================================================ */
 @media (hover: none) and (pointer: coarse) {
 
@@ -554,9 +532,7 @@ body.light-mode .mobile-nav-btn.active {
         transform: translateY(0) !important;
     }
 
-    .project-card::after {
-        display: none;
-    }
+    .project-card::after { display: none; }
 
     .project-card:hover {
         transform: none !important;
@@ -568,7 +544,6 @@ body.light-mode .mobile-nav-btn.active {
         transition: transform 0.1s ease;
     }
 
-    /* Larger tap targets */
     .flip-btn,
     .cta-btn,
     .submit-btn,
@@ -583,3 +558,7 @@ body.light-mode .mobile-nav-btn.active {
         display: none;
     }
 }
+
+
+
+
