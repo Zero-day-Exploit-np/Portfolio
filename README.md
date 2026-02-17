@@ -16,17 +16,6 @@ A modern, feature-rich portfolio website with all the latest updates and improve
 ✅ **Resume Download** - Button to download your CV  
 ✅ **Light/Dark Theme** - Toggle between themes (fully working!)  
 
-## 🚀 Quick Start (3 Steps!)
-
-### 1. Customize Your Info
-Edit `js/config.js` and `js/projects.js`
-
-### 2. Update GitHub Stats
-In `index.html`, replace `yourusername` with your GitHub username (3 places)
-
-### 3. Test It
-Open `index.html` in your browser!
-
 ## 📝 To-Do Checklist
 
 - [ ] Update config.js with your info
