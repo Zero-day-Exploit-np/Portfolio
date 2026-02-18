@@ -169,19 +169,6 @@ window.addEventListener("DOMContentLoaded", () => {
 // Export utilities
 window.utils = utils;
 
-// Console message
-console.log(
-  "%c🚀 Developer Portfolio",
-  "font-size: 24px; font-weight: bold; color: #ff6b35;",
-);
-console.log(
-  "%cWant to see the code? Check out the GitHub repo!",
-  "font-size: 14px; color: #f7931e;",
-);
-console.log(
-  "%chttps://github.com/yourusername/portfolio",
-  "font-size: 12px; color: #004e89;",
-);
 // PWA Service Worker Registration
 // Add this to the bottom of js/main.js
 
