@@ -3,7 +3,7 @@
   "short_name": "Portfolio",
   "description": "Full Stack Developer Portfolio showcasing creative web projects",
   "start_url": "/",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#1a1423",
   "theme_color": "#ff6b35",
   "orientation": "portrait-primary",
