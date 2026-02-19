@@ -45,8 +45,8 @@ html {
     border: 2px solid var(--primary);
     border-radius: 50%;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 10px;
     pointer-events: none;
     z-index: 10000;
     mix-blend-mode: difference;
