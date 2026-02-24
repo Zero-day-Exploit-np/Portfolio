@@ -17,7 +17,7 @@ const PROJECTS = [
     title: "Shortest Path Finder",
     description:
       "The Shortest Path Finder is a real-world DSA-based Web app that calculates the shortest root between two loaction using live map data.",
-    tags: ["Html", "JavaScript", "Python"],
+    tags: ["Html", "Css", "JavaScript", "Python"],
     image: "assets/images/projects/project2.jpg",
     links: {
       demo: "https://zero-day-exploit-np.github.io/Projects/Shortest_path/frontend/index.html",
@@ -28,11 +28,12 @@ const PROJECTS = [
     id: 3,
     title: "Web Blog",
     description: "",
-    tags: ["Vue.js", "D3.js", "Python", "PostgreSQL"],
+    tags: ["html", "Php", "Python", "DBMS", "SQL", "JavaScript"],
     image: "assets/images/projects/project3.jpg",
     links: {
       demo: "https://zero-day-exploit-np.github.io/Projects/Website-Template-main/index.html",
-      github:"https://zero-day-exploit-np.github.io/Projects/Website-Template-main.git",
+      github:
+        "https://zero-day-exploit-np.github.io/Projects/Website-Template-main.git",
     },
   },
 ];
