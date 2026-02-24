@@ -2,14 +2,14 @@
 const PROJECTS = [
   {
     id: 1,
-    title: "E-Commerce Platform",
+    title: "Finger_Count",
     description:
       "Full-featured e-commerce solution with real-time inventory management and secure payment processing.",
-    tags: ["Python", "Html", "CSS", "C"],
+    tags: ["Python"],
     image: "assets/images/projects/project1.jpg", // Add your project image here
     links: {
       demo: "https://example.com",
-      github: "https://github.com/yourusername/project1",
+      github: "https://github.com/Zero-day-Exploit-np/finger_count.git",
     },
   },
   {
@@ -21,7 +21,7 @@ const PROJECTS = [
     image: "assets/images/projects/project2.jpg",
     links: {
       demo: "https://example.com",
-      github: "https://github.com/yourusername/project2",
+      github: "https://github.com/Zero-day-Exploit-np/Shortest-Path.git",
     },
   },
   {
