@@ -2,14 +2,14 @@
 const PROJECTS = [
   {
     id: 1,
-    title: "Finger_Count",
+    title: "Finger_Movement",
     description:
-      "Full-featured e-commerce solution with real-time inventory management and secure payment processing.",
+      "This is a real-time finger counting application that detects hands using Mediapipe and counts the number of fingers held up using hand landmark analysis.",
     tags: ["Python"],
     image: "assets/images/projects/project1.jpg", // Add your project image here
     links: {
-      demo: "https://example.com",
-      github: "https://github.com/Zero-day-Exploit-np/finger_count.git",
+      demo: "https://zero-day-exploit-np.github.io/Projects/finger_count-main/finger.py",
+      github: "https://github.com/Zero-day-Exploit-np/finger_count-main.git",
     },
   },
   {
@@ -20,20 +20,19 @@ const PROJECTS = [
     tags: ["Html", "JavaScript", "Python"],
     image: "assets/images/projects/project2.jpg",
     links: {
-      demo: "https://example.com",
+      demo: "https://zero-day-exploit-np.github.io/Projects/Shortest_path/frontend/index.html",
       github: "https://github.com/Zero-day-Exploit-np/Shortest-Path.git",
     },
   },
   {
     id: 3,
-    title: "Analytics Dashboard",
-    description:
-      "Real-time data visualization platform with interactive charts and AI-powered insights.",
+    title: "Web Blog",
+    description: "",
     tags: ["Vue.js", "D3.js", "Python", "PostgreSQL"],
     image: "assets/images/projects/project3.jpg",
     links: {
-      demo: "https://example.com",
-      github: "https://github.com/yourusername/project3",
+      demo: "https://zero-day-exploit-np.github.io/Projects/Website-Template-main/index.html",
+      github:"https://zero-day-exploit-np.github.io/Projects/Website-Template-main.git",
     },
   },
 ];
