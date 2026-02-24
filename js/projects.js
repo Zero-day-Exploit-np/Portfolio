@@ -14,10 +14,10 @@ const PROJECTS = [
   },
   {
     id: 2,
-    title: "Design System Library",
+    title: "Shortest Path Finder",
     description:
-      "Comprehensive component library with accessible, customizable UI elements for modern web apps.",
-    tags: ["TypeScript", "React", "Storybook"],
+      "The Shortest Path Finder is a real-world DSA-based Web app that calculates the shortest root between two loaction using live map data.",
+    tags: ["Html", "JavaScript", "Python"],
     image: "assets/images/projects/project2.jpg",
     links: {
       demo: "https://example.com",
