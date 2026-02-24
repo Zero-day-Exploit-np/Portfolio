@@ -557,7 +557,7 @@ textarea.form-input {
     opacity: 0;
     transform: translateY(20px);
     transition: all var(--transition-normal) 0.15s;
-    color: white;
+    color: black;
 }
 
 .project-card:hover .project-description {
