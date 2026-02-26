@@ -1,5 +1,5 @@
 // Service Worker - sw.js
-const CACHE_NAME = "portfolio-v2";
+const CACHE_NAME = "portfolio-v3";
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
@@ -75,40 +75,35 @@ self.addEventListener("fetch", (event) => {
         }),
     );
   } else {
-    // For other requests, use cache-first strategy
+    // For other requests, use network-first strategy so updates are always received
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        // Return cached version or fetch from network
-        return (
-          response ||
-          fetch(event.request)
-            .then((fetchResponse) => {
-              // Don't cache non-GET requests or non-http(s) requests
-              if (
-                event.request.method !== "GET" ||
-                !event.request.url.startsWith("http")
-              ) {
-                return fetchResponse;
-              }
+      fetch(event.request)
+        .then((fetchResponse) => {
+          // Don't cache non-GET requests or non-http(s) requests
+          if (
+            event.request.method !== "GET" ||
+            !event.request.url.startsWith("http")
+          ) {
+            return fetchResponse;
+          }
 
-              // Clone the response
-              const responseToCache = fetchResponse.clone();
+          // Clone and cache the fresh response
+          const responseToCache = fetchResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
 
-              // Add to cache
-              caches.open(CACHE_NAME).then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-
-              return fetchResponse;
-            })
-            .catch(() => {
-              // Return offline page if available
-              if (event.request.destination === "document") {
-                return caches.match("/offline.html");
-              }
-            })
-        );
-      }),
+          return fetchResponse;
+        })
+        .catch(() => {
+          // Network failed — fall back to cache
+          return caches.match(event.request).then((cached) => {
+            if (cached) return cached;
+            if (event.request.destination === "document") {
+              return caches.match("/offline.html");
+            }
+          });
+        }),
     );
   }
 });
