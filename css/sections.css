@@ -295,7 +295,7 @@
     transform: translateY(20px);
     opacity: 0;
     transition: all var(--transition-normal);
-    color: white;
+    color: black;
 }
 
 .project-card:hover .project-title {
@@ -319,7 +319,7 @@
 
 .tag {
     padding: 5px 15px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgb(246, 133, 3);
     border-radius: 20px;
     font-size: 12px;
     letter-spacing: 1px;
