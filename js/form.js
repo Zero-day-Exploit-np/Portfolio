@@ -1,7 +1,7 @@
 const GITHUB_CONFIG = {
   owner: "Zero-day-Exploit-np",
   repo: "Portfolio",
-  token: "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",
+  token: "",
 };
 
 document
