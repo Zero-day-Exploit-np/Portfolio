@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { articles, getArticle, sortedArticles } from "../../content/site";
+
+export async function getStaticPaths() {
+  return articles.map((a) => ({ params: { slug: a.slug } }));
+}
+
+const { slug } = Astro.params;
+const article = getArticle(slug!);
+
+if (!article) {
+  return Astro.redirect("/404");
+}
+
+const date = new Date(article.date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const idx = sortedArticles.findIndex((a) => a.slug === article.slug);
+const prev = idx > 0 ? sortedArticles[idx - 1] : null;
+const next = idx < sortedArticles.length - 1 ? sortedArticles[idx + 1] : null;
+---
+
+<BaseLayout
+  title={article.title}
+  description={article.excerpt}
+  type="article"
+  publishedTime={article.date}
+>
+  <article class="section">
+    <div class="container container-narrow">
+      <a href="/blog" class="back-link reveal">
+        <Icon name="arrow-right" size={14} class="back-ic" /> All articles
+      </a>
+
+      <header class="art-header reveal">
+        <div class="art-meta">
+          <span><Icon name="calendar" size={14} /> {date}</span>
+          <span>{article.readingTime}</span>
+        </div>
+        <h1 class="art-title">{article.title}</h1>
+        <p class="art-excerpt">{article.excerpt}</p>
+        <div class="cluster art-tags">
+          {article.tags.map((t) => <span class="tag">{t}</span>)}
+        </div>
+      </header>
+
+      <div class="art-body reveal" set:html={article.body}></div>
+
+      <nav class="art-nav reveal" aria-label="More articles">
+        {prev ? (
+          <a href={`/blog/${prev.slug}`} class="art-nav-link">
+            <span class="an-k">Previous</span>
+            <span class="an-title">{prev.title}</span>
+          </a>
+        ) : <span />}
+        {next ? (
+          <a href={`/blog/${next.slug}`} class="art-nav-link an-right">
+            <span class="an-k">Next</span>
+            <span class="an-title">{next.title}</span>
+          </a>
+        ) : <span />}
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    transition: color 0.2s var(--ease);
+  }
+  .back-link:hover {
+    color: var(--accent-bright);
+  }
+  .back-ic {
+    transform: rotate(180deg);
+  }
+  .art-header {
+    margin-bottom: 2.5rem;
+  }
+  .art-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .art-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .art-title {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+  .art-excerpt {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+  .art-tags {
+    gap: 0.45rem;
+  }
+  .art-body {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+  .art-body :global(h2) {
+    color: var(--text);
+    font-size: 1.3rem;
+    margin: 2rem 0 0.7rem;
+    letter-spacing: -0.02em;
+  }
+  .art-body :global(p) {
+    margin-bottom: 1.1rem;
+  }
+  .art-body :global(code) {
+    color: var(--accent-bright);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9em;
+  }
+  .art-body :global(em) {
+    color: var(--text);
+    font-style: italic;
+  }
+  .art-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .art-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .art-nav-link:hover {
+    border-color: var(--border-accent);
+    background: var(--surface-2);
+  }
+  .an-right {
+    text-align: right;
+  }
+  .an-k {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-muted);
+  }
+  .an-title {
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+  @media (max-width: 560px) {
+    .art-nav {
+      grid-template-columns: 1fr;
+    }
+    .an-right {
+      text-align: left;
+    }
+  }
+</style>

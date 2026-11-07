@@ -1,0 +1,279 @@
+---
+import { profile } from "../content/site";
+import Icon from "./Icon.astro";
+---
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <p class="hero-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        {profile.availability}
+      </p>
+      <h1 class="hero-title">
+        {profile.title}
+        <span class="hero-sub">{profile.tagline}</span>
+      </h1>
+      <p class="hero-summary">{profile.summary}</p>
+
+      <div class="hero-cta">
+        <a href="/projects" class="btn btn-primary">
+          View Projects <Icon name="arrow-right" size={16} />
+        </a>
+        <a href={profile.resume} class="btn btn-secondary" download>
+          <Icon name="download" size={16} /> Resume
+        </a>
+      </div>
+
+      <div class="hero-social">
+        <a
+          href={profile.github}
+          class="mono-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="github" size={16} /> {profile.githubHandle}
+        </a>
+        {
+          profile.linkedin ? (
+            <a
+              href={profile.linkedin}
+              class="mono-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="linkedin" size={16} /> LinkedIn
+            </a>
+          ) : null
+        }
+        <a href={`mailto:${profile.email}`} class="mono-link">
+          <Icon name="mail" size={16} /> Email
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-terminal reveal" aria-hidden="true">
+      <div class="term-chrome">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="term-title">bikram@portfolio — zsh</span>
+      </div>
+      <pre class="term-body"><code><span class="t-line"><span class="t-prompt">~</span> <span class="t-cmd">whoami</span></span>
+<span class="t-out">software engineer</span>
+<span class="t-line"><span class="t-prompt">~</span> <span class="t-cmd">cat focus.md</span></span>
+<span class="t-out">- systems programming</span>
+<span class="t-out">- linux &amp; operating systems</span>
+<span class="t-out">- backend engineering</span>
+<span class="t-out">- data structures &amp; algorithms</span>
+<span class="t-out">- cybersecurity</span>
+<span class="t-line"><span class="t-prompt">~</span> <span class="t-cmd">status</span></span>
+<span class="t-out">open to internships &amp; roles</span>
+<span class="t-line"><span class="t-prompt">~</span> <span class="cursor"></span></span></code></pre>
+    </div>
+  </div>
+
+  <a href="#about" class="hero-scroll" aria-label="Scroll to about section">
+    <span>Scroll</span>
+    <span class="scroll-line"></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(3rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.3rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  .status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+    animation: pulse 2.4s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+  .hero-title {
+    font-size: clamp(2.3rem, 6vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .hero-sub {
+    display: block;
+    font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+    font-weight: 500;
+    color: var(--accent-bright);
+    letter-spacing: -0.02em;
+    margin-top: 0.5rem;
+  }
+  .hero-summary {
+    margin-top: 1.5rem;
+    max-width: 52ch;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .hero-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    margin-top: 1.75rem;
+  }
+
+  /* Terminal */
+  .hero-terminal {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, #101013, #0c0c0f);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    width: 100%;
+    max-width: 30rem;
+    justify-self: stretch;
+  }
+  .term-chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+  }
+  .dot-r {
+    background: #ff5f57;
+  }
+  .dot-y {
+    background: #febc2e;
+  }
+  .dot-g {
+    background: #28c840;
+  }
+  .term-title {
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+  .term-body {
+    margin: 0;
+    padding: 1.1rem 1.1rem 1.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+  .t-line {
+    display: block;
+  }
+  .t-prompt {
+    color: var(--accent);
+  }
+  .t-cmd {
+    color: var(--text);
+  }
+  .t-out {
+    display: block;
+    color: var(--text-muted);
+    padding-left: 0.1rem;
+  }
+  .cursor {
+    display: inline-block;
+    width: 0.55rem;
+    height: 1rem;
+    background: var(--accent-bright);
+    vertical-align: text-bottom;
+    animation: blink 1.05s steps(1) infinite;
+    border-radius: 1px;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .hero-scroll {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 2.5rem auto 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    width: max-content;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 2.2rem;
+    background: linear-gradient(var(--accent), transparent);
+    animation: scrolldown 1.8s var(--ease) infinite;
+  }
+  @keyframes scrolldown {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    50% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    51% {
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+
+  @media (min-width: 880px) {
+    .hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3.5rem;
+    }
+    .hero-scroll {
+      display: flex;
+    }
+  }
+</style>

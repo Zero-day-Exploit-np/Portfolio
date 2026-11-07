@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { sortedArticles } from "../../content/site";
+---
+
+<BaseLayout
+  title="Blog"
+  description="Notes and writing on systems programming, Linux, and software engineering by Bikram Kumar Das."
+>
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="writing"
+          title="Articles"
+          lead="Practical notes on systems programming, Linux internals, and engineering problems I've worked through."
+        />
+      </div>
+      <div class="blog-grid">
+        {sortedArticles.map((a) => <ArticleCard article={a} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 760px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

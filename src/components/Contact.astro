@@ -1,0 +1,249 @@
+---
+import { profile } from "../content/site";
+import Icon from "./Icon.astro";
+
+// FormSubmit.co is a static-compatible form backend (no server of our own).
+// First submission triggers a one-time confirmation email to the address below.
+// See deployment notes to activate it. The contact email is already public.
+const contactEmail = profile.email;
+---
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p class="eyebrow">contact</p>
+        <h2 class="section-title">Let's build something solid</h2>
+        <p class="section-lead">
+          I'm open to internships, full-time roles, and collaboration on systems
+          and backend work. The fastest way to reach me is email.
+        </p>
+
+        <div class="contact-methods">
+          <a href={`mailto:${contactEmail}`} class="contact-method">
+            <span class="cm-ic"><Icon name="mail" size={18} /></span>
+            <span>
+              <span class="cm-label">Email</span>
+              <span class="cm-value">{contactEmail}</span>
+            </span>
+          </a>
+          <a
+            href={profile.github}
+            class="contact-method"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="cm-ic"><Icon name="github" size={18} /></span>
+            <span>
+              <span class="cm-label">GitHub</span>
+              <span class="cm-value">{profile.githubHandle}</span>
+            </span>
+          </a>
+          {
+            profile.linkedin ? (
+              <a
+                href={profile.linkedin}
+                class="contact-method"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="cm-ic"><Icon name="linkedin" size={18} /></span>
+                <span>
+                  <span class="cm-label">LinkedIn</span>
+                  <span class="cm-value">Connect</span>
+                </span>
+              </a>
+            ) : null
+          }
+        </div>
+      </div>
+
+      <form class="contact-form card reveal" id="contact-form" novalidate>
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input
+            type="email"
+            id="cf-email"
+            name="email"
+            required
+            autocomplete="email"
+          />
+        </div>
+        <div class="field">
+          <label for="cf-subject">Subject</label>
+          <input type="text" id="cf-subject" name="subject" required />
+        </div>
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="4" required></textarea>
+        </div>
+        <!-- honeypot -->
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" />
+        <button type="submit" class="btn btn-primary cf-submit" id="cf-submit">
+          <span class="cf-label-text">Send message</span>
+        </button>
+        <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .contact-methods {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .contact-method:hover {
+    border-color: var(--border-accent);
+    background: var(--surface-2);
+  }
+  .cm-ic {
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: var(--radius-sm);
+    color: var(--accent-bright);
+    background: var(--accent-softer);
+    border: 1px solid var(--border-accent);
+    flex-shrink: 0;
+  }
+  .cm-label {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .cm-value {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .contact-form {
+    display: grid;
+    gap: 1rem;
+    padding: 1.75rem;
+  }
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .field label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-weight: 550;
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    resize: vertical;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .cf-submit {
+    justify-self: start;
+  }
+  .cf-status {
+    font-size: 0.85rem;
+    min-height: 1.2em;
+    color: var(--text-secondary);
+  }
+  .cf-status.ok {
+    color: var(--accent-bright);
+  }
+  .cf-status.err {
+    color: #f87171;
+  }
+  @media (min-width: 880px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("cf-status");
+  const btn = document.getElementById("cf-submit") as HTMLButtonElement | null;
+  const ENDPOINT = "https://formsubmit.co/ajax/sonukarn.org@gmail.com";
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!btn || !status) return;
+    if ((form.querySelector('[name="_honey"]') as HTMLInputElement)?.value) return;
+
+    const data = new FormData(form);
+    btn.disabled = true;
+    status.textContent = "Sending…";
+    status.className = "cf-status";
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          _subject: `Portfolio contact: ${data.get("subject")}`,
+          message: data.get("message"),
+          _template: "table",
+        }),
+      });
+      if (res.ok) {
+        status.textContent =
+          "Thanks — your message has been sent. I'll get back to you soon.";
+        status.className = "cf-status ok";
+        form.reset();
+      } else {
+        throw new Error("Request failed");
+      }
+    } catch {
+      status.textContent =
+        "Could not send the form. Please email me directly instead.";
+      status.className = "cf-status err";
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+</script>

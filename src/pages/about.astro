@@ -1,0 +1,190 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Skills from "../components/Skills.astro";
+import Education from "../components/Education.astro";
+import Contact from "../components/Contact.astro";
+import Icon from "../components/Icon.astro";
+import { profile } from "../content/site";
+
+const focusIcons = ["cpu", "server", "terminal", "spark", "code", "github"];
+---
+
+<BaseLayout
+  title="About"
+  description={`${profile.name} — ${profile.summary}`}
+>
+  <section class="section">
+    <div class="container">
+      <div class="about-hero reveal">
+        <p class="eyebrow">about</p>
+        <h1 class="ah-title">{profile.name}</h1>
+        <p class="ah-role">{profile.roleLine}</p>
+        <p class="ah-summary">{profile.summary}</p>
+        <div class="ah-cta">
+          <a href={profile.resume} class="btn btn-primary" download>
+            <Icon name="download" size={16} /> Resume
+          </a>
+          <a href={profile.github} class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+            <Icon name="github" size={16} /> GitHub
+          </a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <div class="about-text reveal">
+          {profile.about.map((p) => <p>{p}</p>)}
+        </div>
+
+        <aside class="about-focus-card reveal">
+          <h3>Focus areas</h3>
+          <ul>
+            {
+              profile.focusAreas.map((area, i) => (
+                <li>
+                  <span class="focus-ic">
+                    <Icon name={focusIcons[i] ?? "spark"} size={16} />
+                  </span>
+                  {area}
+                </li>
+              ))
+            }
+          </ul>
+          <div class="about-facts">
+            <div class="fact">
+              <span class="fact-k">Location</span>
+              <span class="fact-v">{profile.location}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-k">Degree</span>
+              <span class="fact-v">BSc Computer Science</span>
+            </div>
+            <div class="fact">
+              <span class="fact-k">Status</span>
+              <span class="fact-v">{profile.availability}</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Skills />
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeading eyebrow="education" title="Education" />
+      </div>
+      <Education />
+    </div>
+  </section>
+
+  <Contact />
+</BaseLayout>
+
+<style>
+  .about-hero {
+    max-width: 64ch;
+  }
+  .ah-title {
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    letter-spacing: -0.03em;
+  }
+  .ah-role {
+    color: var(--accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1.4rem;
+  }
+  .ah-summary {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+  .ah-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .about-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+  }
+  .about-text {
+    display: grid;
+    gap: 1.2rem;
+    max-width: 62ch;
+    font-size: 1.02rem;
+  }
+  .about-focus-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    align-self: start;
+  }
+  .about-focus-card h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .about-focus-card ul {
+    display: grid;
+  }
+  .about-focus-card li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+  .about-focus-card li:last-of-type {
+    border-bottom: 0;
+  }
+  .focus-ic {
+    display: grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 7px;
+    color: var(--accent-bright);
+    background: var(--accent-softer);
+    border: 1px solid var(--border-accent);
+    flex-shrink: 0;
+  }
+  .about-facts {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 0.85rem;
+  }
+  .fact {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.85rem;
+  }
+  .fact-k {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .fact-v {
+    color: var(--text);
+    text-align: right;
+  }
+  @media (min-width: 860px) {
+    .about-body {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

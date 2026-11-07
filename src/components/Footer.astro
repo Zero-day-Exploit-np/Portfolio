@@ -1,0 +1,144 @@
+---
+import { profile } from "../content/site";
+import Icon from "./Icon.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="brand">
+        <span class="brand-mark">BD</span>
+        <span>Bikram Das</span>
+      </a>
+      <p class="footer-tag">{profile.roleLine}</p>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Sitemap</h4>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/projects">Projects</a>
+        <a href="/experience">Experience</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href={profile.github} target="_blank" rel="noopener noreferrer">
+          <Icon name="github" size={15} /> GitHub
+        </a>
+        {
+          profile.linkedin ? (
+            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+              <Icon name="linkedin" size={15} /> LinkedIn
+            </a>
+          ) : null
+        }
+        <a href={`mailto:${profile.email}`}>
+          <Icon name="mail" size={15} /> Email
+        </a>
+        <a href={profile.resume} download>
+          <Icon name="download" size={15} /> Resume
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} {profile.name}. All rights reserved.</p>
+    <p class="footer-built">
+      Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
+      · <a href="/sitemap-index.xml">Sitemap</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    background: var(--bg-elevated);
+    padding-top: 3rem;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 650;
+    color: var(--text);
+  }
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent-bright);
+    background: var(--accent-softer);
+    border: 1px solid var(--border-accent);
+  }
+  .footer-tag {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 30ch;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  .footer-col h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.85rem;
+    font-weight: 600;
+  }
+  .footer-col a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color 0.2s var(--ease);
+  }
+  .footer-col a:hover {
+    color: var(--accent-bright);
+  }
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.83rem;
+    color: var(--text-muted);
+  }
+  .footer-built a {
+    color: var(--text-secondary);
+    transition: color 0.2s var(--ease);
+  }
+  .footer-built a:hover {
+    color: var(--accent-bright);
+  }
+  @media (min-width: 680px) {
+    .footer-inner {
+      grid-template-columns: 1.3fr 1fr;
+    }
+  }
+</style>

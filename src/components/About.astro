@@ -1,0 +1,132 @@
+---
+import { profile } from "../content/site";
+import Icon from "./Icon.astro";
+
+const focusIcons = ["cpu", "server", "terminal", "spark", "code", "github"];
+---
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p class="eyebrow">about</p>
+        <h2 class="section-title">Engineering reliable software from the ground up</h2>
+        <div class="about-text">
+          {profile.about.map((p) => <p>{p}</p>)}
+        </div>
+        <div class="about-meta">
+          <span class="about-meta-item">
+            <Icon name="map-pin" size={15} /> {profile.location}
+          </span>
+          <span class="about-meta-item">
+            <Icon name="education" size={15} /> BSc CS, SMIT
+          </span>
+        </div>
+      </div>
+
+      <aside class="about-focus reveal">
+        <h3>What I focus on</h3>
+        <ul>
+          {
+            profile.focusAreas.map((area, i) => (
+              <li>
+                <span class="focus-ic">
+                  <Icon name={focusIcons[i] ?? "spark"} size={16} />
+                </span>
+                {area}
+              </li>
+            ))
+          }
+        </ul>
+        <a href="/about" class="mono-link">
+          More about me <Icon name="arrow-right" size={14} />
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about-text {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1.1rem;
+    max-width: 60ch;
+  }
+  .about-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .about-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .about-focus {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    align-self: start;
+  }
+  .about-focus h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 1.1rem;
+  }
+  .about-focus ul {
+    display: grid;
+    gap: 0.1rem;
+  }
+  .about-focus li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    transition: color 0.2s var(--ease);
+  }
+  .about-focus li:last-of-type {
+    border-bottom: 0;
+  }
+  .about-focus li:hover {
+    color: var(--text);
+  }
+  .focus-ic {
+    display: grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 7px;
+    color: var(--accent-bright);
+    background: var(--accent-softer);
+    border: 1px solid var(--border-accent);
+    flex-shrink: 0;
+  }
+  .about-focus a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1.25rem;
+  }
+  @media (min-width: 860px) {
+    .about-grid {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

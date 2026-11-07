@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<BaseLayout title="Page not found" noindex>
+  <section class="section">
+    <div class="container nf">
+      <p class="nf-code">404</p>
+      <h1 class="nf-title">This page doesn't exist</h1>
+      <p class="nf-text">
+        The page you're looking for may have moved or never existed. Let's get you
+        back on track.
+      </p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn-primary">
+          <Icon name="arrow-right" size={16} class="nf-ic" /> Back home
+        </a>
+        <a href="/projects" class="btn btn-secondary">View projects</a>
+        <a href="/blog" class="btn btn-ghost">Read the blog</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    text-align: center;
+    max-width: 40rem;
+    padding-block: 4rem;
+  }
+  .nf-code {
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 14vw, 8rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .nf-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 1rem 0 0.75rem;
+  }
+  .nf-text {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+  .nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .nf-ic {
+    transform: rotate(180deg);
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import { education } from "../content/site";
+import Icon from "./Icon.astro";
+---
+
+<div class="edu-grid">
+  {
+    education.map((edu) => (
+      <div class="edu-card card reveal">
+        <div class="edu-ic">
+          <Icon name="education" size={22} />
+        </div>
+        <div class="edu-body">
+          <div class="edu-top">
+            <span class="tag tag-accent">{edu.status}</span>
+            <span class="edu-grad">Expected {edu.expectedGraduation}</span>
+          </div>
+          <h3 class="edu-degree">{edu.degree}</h3>
+          <p class="edu-inst">{edu.institution}</p>
+          <p class="edu-desc">{edu.description}</p>
+          <div class="edu-meta">
+            <span><Icon name="calendar" size={14} /> {edu.period}</span>
+            <span><Icon name="map-pin" size={14} /> {edu.location}</span>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .edu-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  .edu-card {
+    display: flex;
+    gap: 1.1rem;
+    padding: 1.5rem;
+  }
+  .edu-ic {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius);
+    color: var(--accent-bright);
+    background: var(--accent-softer);
+    border: 1px solid var(--border-accent);
+    flex-shrink: 0;
+  }
+  .edu-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .edu-grad {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .edu-degree {
+    font-size: 1.15rem;
+    margin-bottom: 0.2rem;
+  }
+  .edu-inst {
+    color: var(--accent-bright);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  .edu-desc {
+    font-size: 0.9rem;
+    margin-bottom: 0.85rem;
+  }
+  .edu-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .edu-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+</style>

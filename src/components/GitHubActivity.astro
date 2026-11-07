@@ -1,0 +1,188 @@
+---
+import { profile } from "../content/site";
+import Icon from "./Icon.astro";
+
+// Fetch real repository data at BUILD time (no client-side requests,
+// no backend). Falls back gracefully if the API is unreachable.
+interface Repo {
+  name: string;
+  description: string | null;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+}
+
+let repos: Repo[] = [];
+try {
+  const res = await fetch(
+    "https://api.github.com/users/Zero-day-Exploit-np/repos?per_page=100&sort=updated",
+    {
+      headers: { Accept: "application/vnd.github+json" },
+    },
+  );
+  if (res.ok) {
+    const data: Repo[] = await res.json();
+    // Filter out forks, the portfolio repo itself, and throwaway learning repos.
+    const skip = new Set([
+      "Portfolio",
+      "my_portfolio",
+      "test_github",
+      "birthday",
+      "birthday-surprise-site",
+      "prajjwal-website",
+    ]);
+    repos = data
+      .filter((r) => !skip.has(r.name) && !r.name.startsWith("skills-") && !r.name.startsWith("exercise-") && !r.name.startsWith("copilot-"))
+      .filter((r) => r.description && r.description.trim().length > 0)
+      .sort(
+        (a, b) =>
+          b.stargazers_count - a.stargazers_count ||
+          (b.forks_count - a.forks_count),
+      )
+      .slice(0, 6);
+  }
+} catch {
+  repos = [];
+}
+---
+
+<section class="section section-alt" id="github">
+  <div class="container">
+    <div class="gh-head reveal">
+      <div>
+        <p class="eyebrow">github</p>
+        <h2 class="section-title">Open source & code</h2>
+        <p class="section-lead">
+          A selection of public repositories. Everything here is fetched live at
+          build time — no fabricated metrics.
+        </p>
+      </div>
+      <a
+        href={profile.github}
+        class="btn btn-secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="github" size={17} /> {profile.githubHandle}
+      </a>
+    </div>
+
+    {
+      repos.length > 0 ? (
+        <div class="gh-grid">
+          {repos.map((repo) => (
+            <a
+              href={repo.html_url}
+              class="gh-card card card-hover reveal"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="gh-card-top">
+                <Icon name="folder" size={17} />
+                <span class="gh-stats">
+                  {repo.stargazers_count > 0 && (
+                    <span title="stars">★ {repo.stargazers_count}</span>
+                  )}
+                  {repo.forks_count > 0 && (
+                    <span title="forks">⑂ {repo.forks_count}</span>
+                  )}
+                </span>
+              </div>
+              <h3 class="gh-name">{repo.name}</h3>
+              <p class="gh-desc">{repo.description}</p>
+              {repo.language && <span class="gh-lang"><span class="lang-dot" /> {repo.language}</span>}
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="gh-fallback card reveal">
+          <p>
+            See all repositories on GitHub — including systems tooling, DSA
+            practice, and backend projects.
+          </p>
+          <a href={profile.github} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            Visit GitHub <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .gh-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .gh-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .gh-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .gh-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-muted);
+    margin-bottom: 0.85rem;
+  }
+  .gh-stats {
+    display: flex;
+    gap: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-muted);
+  }
+  .gh-name {
+    font-size: 1.02rem;
+    font-family: var(--font-mono);
+    color: var(--accent-bright);
+    margin-bottom: 0.4rem;
+  }
+  .gh-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.9rem;
+    flex: 1;
+  }
+  .gh-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .lang-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .gh-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 2rem;
+  }
+  @media (min-width: 640px) {
+    .gh-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1000px) {
+    .gh-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

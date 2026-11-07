@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Skills from "../components/Skills.astro";
+import FeaturedProjects from "../components/FeaturedProjects.astro";
+import Experience from "../components/Experience.astro";
+import Education from "../components/Education.astro";
+import Certifications from "../components/Certifications.astro";
+import GitHubActivity from "../components/GitHubActivity.astro";
+import LatestArticles from "../components/LatestArticles.astro";
+import Contact from "../components/Contact.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<BaseLayout>
+  <Hero />
+
+  <About />
+
+  <Skills />
+
+  <FeaturedProjects />
+
+  <!-- Experience (condensed) -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:2.5rem">
+        <SectionHeading
+          eyebrow="experience"
+          title="Where I've worked"
+          lead="A condensed timeline — see the full page for details."
+        />
+      </div>
+      <Experience compact />
+      <a href="/experience" class="btn btn-ghost exp-all">
+        Full experience <Icon name="arrow-right" size={16} />
+      </a>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="section section-alt" id="education">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeading eyebrow="education" title="Academic background" />
+      </div>
+      <Education />
+    </div>
+  </section>
+
+  <!-- Certifications & achievements -->
+  <section class="section" id="certifications">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="achievements"
+          title="Certifications & achievements"
+          lead="Open-source work and completed technical courses — all verifiable."
+        />
+      </div>
+      <Certifications limit={4} />
+    </div>
+  </section>
+
+  <GitHubActivity />
+
+  <LatestArticles />
+
+  <Contact />
+</BaseLayout>
+
+<style>
+  .exp-all {
+    margin-top: 2rem;
+  }
+</style>

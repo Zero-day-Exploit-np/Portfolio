@@ -1,0 +1,153 @@
+---
+import type { Project } from "../content/site";
+import Icon from "./Icon.astro";
+
+interface Props {
+  project: Project;
+  detailed?: boolean;
+}
+const { project, detailed = false } = Astro.props;
+---
+
+<article class:list={["project-card", "card", "card-hover", "reveal"]}>
+  <div class="pc-top">
+    <span class="tag tag-accent">{project.category}</span>
+    <span class="pc-ic" aria-hidden="true">
+      <Icon name="folder" size={16} />
+    </span>
+  </div>
+
+  <h3 class="pc-title">
+    <a href={`/projects/${project.slug}`}>{project.title}</a>
+  </h3>
+  <p class="pc-tagline">{project.tagline}</p>
+  <p class="pc-desc">{project.description}</p>
+
+  {
+    detailed && project.highlights.length > 0 && (
+      <ul class="pc-highlights">
+        {project.highlights.map((h) => (
+          <li>
+            <span class="pc-bullet" aria-hidden="true" />
+            {h}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <div class="cluster pc-tech">
+    {project.technologies.map((t) => <span class="tag">{t}</span>)}
+  </div>
+
+  <div class="pc-links">
+    <a href={`/projects/${project.slug}`} class="mono-link pc-detail">
+      View project <Icon name="arrow-right" size={14} />
+    </a>
+    <a
+      href={project.github}
+      class="mono-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${project.title} on GitHub`}
+    >
+      <Icon name="github" size={15} /> GitHub
+    </a>
+    {
+      project.demo && (
+        <a
+          href={project.demo}
+          class="mono-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="external-link" size={14} /> Live
+        </a>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .pc-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .pc-ic {
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 7px;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+  }
+  .pc-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  .pc-title a {
+    transition: color 0.2s var(--ease);
+  }
+  .pc-title a:hover {
+    color: var(--accent-bright);
+  }
+  .pc-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent-bright);
+    margin-bottom: 0.85rem;
+  }
+  .pc-desc {
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .pc-highlights {
+    display: grid;
+    gap: 0.45rem;
+    margin-bottom: 1.1rem;
+  }
+  .pc-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  .pc-bullet {
+    margin-top: 0.5rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .pc-tech {
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+  .pc-tech .tag {
+    font-size: 0.74rem;
+  }
+  .pc-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .pc-detail {
+    color: var(--accent-bright);
+  }
+</style>

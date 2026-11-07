@@ -1,0 +1,47 @@
+---
+import { featuredProjects } from "../content/site";
+import ProjectCard from "./ProjectCard.astro";
+import Icon from "./Icon.astro";
+---
+
+<section class="section" id="projects">
+  <div class="container">
+    <div class="fp-head reveal">
+      <div>
+        <p class="eyebrow">selected work</p>
+        <h2 class="section-title">Featured projects</h2>
+      </div>
+      <a href="/projects" class="btn btn-ghost fp-all">
+        All projects <Icon name="arrow-right" size={16} />
+      </a>
+    </div>
+
+    <div class="fp-grid">
+      {featuredProjects.map((p) => <ProjectCard project={p} detailed />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fp-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .fp-all {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .fp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 760px) {
+    .fp-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

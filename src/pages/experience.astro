@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Experience from "../components/Experience.astro";
+import Education from "../components/Education.astro";
+import Certifications from "../components/Certifications.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<BaseLayout
+  title="Experience"
+  description="Work experience, education, certifications, and achievements of Bikram Kumar Das — Software Engineer."
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="experience"
+          title="Experience & background"
+          lead="Internship work, education, and verifiable achievements — the full picture in one place."
+        />
+      </div>
+      <Experience />
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeading eyebrow="education" title="Education" />
+      </div>
+      <Education />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="achievements"
+          title="Certifications & achievements"
+          lead="Open-source contributions and completed technical coursework — each one links to a verifiable source."
+        />
+      </div>
+      <Certifications />
+    </div>
+  </section>
+
+  <Contact />
+</BaseLayout>

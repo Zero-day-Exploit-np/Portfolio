@@ -1,0 +1,45 @@
+---
+import { sortedArticles } from "../content/site";
+import ArticleCard from "./ArticleCard.astro";
+import Icon from "./Icon.astro";
+
+const recent = sortedArticles.slice(0, 3);
+---
+
+<section class="section" id="articles">
+  <div class="container">
+    <div class="la-head reveal">
+      <div>
+        <p class="eyebrow">writing</p>
+        <h2 class="section-title">Latest articles</h2>
+      </div>
+      <a href="/blog" class="btn btn-ghost">
+        All articles <Icon name="arrow-right" size={16} />
+      </a>
+    </div>
+
+    <div class="la-grid">
+      {recent.map((a) => <ArticleCard article={a} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .la-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .la-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 760px) {
+    .la-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

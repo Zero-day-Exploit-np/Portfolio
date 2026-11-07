@@ -1,0 +1,106 @@
+---
+import { certifications } from "../content/site";
+import Icon from "./Icon.astro";
+
+interface Props {
+  limit?: number;
+}
+const { limit } = Astro.props;
+const items = limit ? certifications.slice(0, limit) : certifications;
+
+const typeIcons: Record<string, string> = {
+  "Open Source": "github",
+  Course: "book",
+  Certification: "award",
+  Achievement: "spark",
+};
+---
+
+<div class="cert-grid">
+  {
+    items.map((cert) => (
+      <a
+        href={cert.link}
+        class="cert-card card card-hover reveal"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="cert-top">
+          <span class="cert-ic">
+            <Icon name={typeIcons[cert.type] ?? "award"} size={18} />
+          </span>
+          <span class="tag">{cert.type}</span>
+        </div>
+        <h3 class="cert-title">{cert.title}</h3>
+        <p class="cert-issuer">
+          {cert.issuer}
+          <span class="cert-year"> · {cert.year}</span>
+        </p>
+        <p class="cert-desc">{cert.description}</p>
+        <span class="cert-link">
+          View <Icon name="external-link" size={13} />
+        </span>
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .cert-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .cert-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .cert-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .cert-ic {
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: var(--radius-sm);
+    color: var(--accent-bright);
+    background: var(--accent-softer);
+    border: 1px solid var(--border-accent);
+  }
+  .cert-title {
+    font-size: 1.02rem;
+    margin-bottom: 0.3rem;
+  }
+  .cert-issuer {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+  .cert-year {
+    color: var(--text-muted);
+  }
+  .cert-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .cert-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-bright);
+  }
+  @media (min-width: 640px) {
+    .cert-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

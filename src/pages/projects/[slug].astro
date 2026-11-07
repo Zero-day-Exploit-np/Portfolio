@@ -1,0 +1,267 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { projects, getProject } from "../../content/site";
+
+export async function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = getProject(slug!);
+
+if (!project) {
+  return Astro.redirect("/404");
+}
+
+const related = projects
+  .filter((p) => p.slug !== project.slug && p.category === project.category)
+  .slice(0, 2);
+---
+
+<BaseLayout
+  title={project.title}
+  description={project.description}
+  image="/assets/images/og.png"
+  type="article"
+>
+  <article class="section">
+    <div class="container container-narrow">
+      <a href="/projects" class="back-link reveal">
+        <Icon name="arrow-right" size={14} class="back-ic" /> All projects
+      </a>
+
+      <header class="pd-header reveal">
+        <span class="tag tag-accent">{project.category}</span>
+        <h1 class="pd-title">{project.title}</h1>
+        <p class="pd-tagline">{project.tagline}</p>
+      </header>
+
+      <div class="pd-layout">
+        <div class="pd-main">
+          <section class="reveal">
+            <h2 class="pd-h">Overview</h2>
+            <p class="pd-desc">{project.description}</p>
+          </section>
+
+          {
+            project.content && (
+              <section class="reveal">
+                <h2 class="pd-h">In detail</h2>
+                <div class="pd-content" set:html={project.content} />
+              </section>
+            )
+          }
+
+          {
+            project.highlights.length > 0 && (
+              <section class="reveal">
+                <h2 class="pd-h">Key engineering points</h2>
+                <ul class="pd-highlights">
+                  {project.highlights.map((h) => (
+                    <li>
+                      <span class="pd-bullet" aria-hidden="true" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
+        </div>
+
+        <aside class="pd-aside reveal">
+          <div class="aside-card">
+            <h3 class="aside-h">Technologies</h3>
+            <div class="cluster">
+              {project.technologies.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+          <div class="aside-card">
+            <h3 class="aside-h">Links</h3>
+            <a href={project.github} class="aside-link" target="_blank" rel="noopener noreferrer">
+              <Icon name="github" size={16} /> GitHub repository
+              <Icon name="external-link" size={13} class="aside-ext" />
+            </a>
+            {
+              project.demo && (
+                <a href={project.demo} class="aside-link" target="_blank" rel="noopener noreferrer">
+                  <Icon name="external-link" size={16} /> Live demo
+                </a>
+              )
+            }
+          </div>
+        </aside>
+      </div>
+
+      {
+        related.length > 0 && (
+          <section class="pd-related reveal">
+            <h2 class="pd-h">Related work</h2>
+            <div class="related-grid">
+              {related.map((r) => (
+                <a href={`/projects/${r.slug}`} class="related-card card card-hover">
+                  <span class="tag tag-accent">{r.category}</span>
+                  <h3 class="rc-title">{r.title}</h3>
+                  <p class="rc-tagline">{r.tagline}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    transition: color 0.2s var(--ease);
+  }
+  .back-link:hover {
+    color: var(--accent-bright);
+  }
+  .back-ic {
+    transform: rotate(180deg);
+  }
+  .pd-header {
+    margin-bottom: 2.5rem;
+  }
+  .pd-title {
+    font-size: clamp(1.9rem, 5vw, 2.8rem);
+    margin: 0.8rem 0 0.4rem;
+    letter-spacing: -0.03em;
+  }
+  .pd-tagline {
+    color: var(--accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+  }
+  .pd-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .pd-h {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .pd-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+  }
+  .pd-content {
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+  .pd-content :global(h2) {
+    color: var(--text);
+    font-size: 1.05rem;
+    margin: 1.5rem 0 0.6rem;
+  }
+  .pd-content :global(p) {
+    margin-bottom: 1rem;
+  }
+  .pd-content :global(code) {
+    color: var(--accent-bright);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.1rem 0.4rem;
+  }
+  .pd-highlights {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .pd-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: var(--text-secondary);
+  }
+  .pd-bullet {
+    margin-top: 0.55rem;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .pd-aside {
+    display: grid;
+    gap: 1rem;
+    align-self: start;
+  }
+  .aside-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  .aside-h {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 0.85rem;
+  }
+  .aside-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s var(--ease);
+  }
+  .aside-link:last-child {
+    border-bottom: 0;
+  }
+  .aside-link:hover {
+    color: var(--accent-bright);
+  }
+  .aside-ext {
+    margin-left: auto;
+    color: var(--text-muted);
+  }
+  .pd-related {
+    margin-top: 3.5rem;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .rc-title {
+    font-size: 1.05rem;
+  }
+  .rc-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent-bright);
+  }
+  @media (min-width: 820px) {
+    .pd-layout {
+      grid-template-columns: 1fr 16rem;
+      gap: 3rem;
+    }
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,236 @@
+---
+import { navItems, SITE } from "../content/site";
+import Icon from "./Icon.astro";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+// Match active nav item: exact for home, startsWith for sections.
+const isActive = (href: string) => {
+  const h = href.replace(/\/$/, "") || "/";
+  if (h === "/") return pathname === "/";
+  return pathname === h || pathname.startsWith(h + "/");
+};
+---
+
+<header class="nav" id="site-header">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label={`${SITE.author} — home`}>
+      <span class="brand-mark">BD</span>
+      <span class="brand-text">Bikram Das</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={["nav-link", { active: isActive(item.href) }]}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="nav-actions">
+      <a
+        href="https://github.com/Zero-day-Exploit-np"
+        class="nav-icon"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub profile"
+      >
+        <Icon name="github" size={19} />
+      </a>
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Icon name="menu" size={22} />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Mobile navigation">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={["mobile-link", { active: isActive(item.href) }]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href="https://github.com/Zero-day-Exploit-np"
+        class="mobile-link mobile-gh"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="github" size={18} /> GitHub
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 10, 11, 0.72);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    gap: 1rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent-bright);
+    background: var(--accent-softer);
+    border: 1px solid var(--border-accent);
+  }
+  .brand-text {
+    font-size: 0.98rem;
+  }
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 0.15rem;
+  }
+  .nav-link {
+    position: relative;
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .nav-link:hover {
+    color: var(--text);
+    background: var(--surface);
+  }
+  .nav-link.active {
+    color: var(--text);
+  }
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.15rem;
+    height: 1.5px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .nav-icon {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
+      background 0.2s var(--ease);
+  }
+  .nav-icon:hover {
+    color: var(--accent-bright);
+    border-color: var(--border-accent);
+    background: var(--accent-softer);
+  }
+  .nav-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+  }
+  .mobile-menu {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elevated);
+    padding: 0.75rem 1.5rem 1.25rem;
+  }
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s var(--ease);
+  }
+  .mobile-link:hover,
+  .mobile-link.active {
+    color: var(--accent-bright);
+  }
+  .mobile-gh {
+    margin-top: 0.5rem;
+  }
+  @media (min-width: 880px) {
+    .nav-links {
+      display: flex;
+    }
+    .nav-toggle {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle — minimal, progressive enhancement.
+  const toggle = document.getElementById("nav-toggle");
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    toggle.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+    if (menu) menu.hidden = open;
+    // swap icon
+    toggle.innerHTML = open
+      ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 6h20v2H2V6zm0 5h20v2H2v-2zm0 5h20v2H2v-2z" fill="currentColor"/></svg>'
+      : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.4 5L12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4 6.4 5z" fill="currentColor"/></svg>';
+  });
+  // close on navigation
+  menu?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      if (menu) menu.hidden = true;
+      toggle?.setAttribute("aria-expanded", "false");
+    }),
+  );
+</script>

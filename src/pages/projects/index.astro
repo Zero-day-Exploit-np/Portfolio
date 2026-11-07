@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { projects } from "../../content/site";
+
+const categories = ["All", ...new Set(projects.map((p) => p.category))];
+const ordered = [...projects].sort((a, b) => Number(b.featured) - Number(a.featured) || a.order - b.order);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Systems programming, backend, and embedded projects by Bikram Kumar Das — including a Linux Bluetooth daemon, a minimal OS, a government file-tracking system, and an environment sensor rover."
+>
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="projects"
+          title="Things I've built"
+          lead="A mix of systems software, backend platforms, and embedded work — each one a real engineering problem, not a tutorial."
+        />
+      </div>
+
+      <div class="filters reveal" role="tablist" aria-label="Filter projects by category">
+        {
+          categories.map((cat, i) => (
+            <button
+              class:list={["filter", { active: i === 0 }]}
+              data-filter={cat}
+              type="button"
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="pj-grid" id="pj-grid">
+        {ordered.map((p) => <ProjectCard project={p} detailed />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .filter {
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .filter:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .filter.active {
+    color: var(--accent-bright);
+    border-color: var(--border-accent);
+    background: var(--accent-softer);
+  }
+  .pj-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .pj-grid .project-card.hidden {
+    display: none;
+  }
+  @media (min-width: 760px) {
+    .pj-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter");
+  const cards = document.querySelectorAll<HTMLElement>("#pj-grid > .project-card");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach((b) => b.classList.toggle("active", b === btn));
+      cards.forEach((card) => {
+        const cat = card.querySelector(".tag-accent")?.textContent?.trim() ?? "";
+        card.classList.toggle("hidden", filter !== "All" && cat !== filter);
+      });
+    });
+  });
+</script>

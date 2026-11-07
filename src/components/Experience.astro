@@ -1,0 +1,147 @@
+---
+import { experiences } from "../content/site";
+import Icon from "./Icon.astro";
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const items = compact ? experiences.slice(0, 1) : experiences;
+---
+
+<div class="timeline">
+  {
+    items.map((exp) => (
+      <div class="tl-item reveal">
+        <div class="tl-marker" aria-hidden="true">
+          <span class="tl-dot" />
+        </div>
+        <div class="tl-content card">
+          <div class="tl-meta">
+            <span class="tl-period">
+              <Icon name="calendar" size={14} /> {exp.period}
+            </span>
+            <span class="tag tag-accent">{exp.type}</span>
+          </div>
+          <h3 class="tl-role">{exp.role}</h3>
+          <p class="tl-org">
+            {exp.organization}
+            <span class="tl-loc"> · {exp.location}</span>
+          </p>
+          <p class="tl-summary">{exp.summary}</p>
+          <ul class="tl-highlights">
+            {exp.highlights.map((h) => (
+              <li>
+                <span class="tl-bullet" aria-hidden="true" />
+                {h}
+              </li>
+            ))}
+          </ul>
+          {exp.link && (
+            <a
+              href={exp.link}
+              class="mono-link tl-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="github" size={15} /> View the work
+            </a>
+          )}
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 1.5rem;
+    padding-left: 1.6rem;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.4rem;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+  }
+  .tl-marker {
+    position: absolute;
+    left: -1.6rem;
+    top: 1.4rem;
+  }
+  .tl-dot {
+    display: block;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--border-accent);
+  }
+  .tl-content {
+    padding: 1.4rem 1.5rem;
+  }
+  .tl-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+  }
+  .tl-period {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .tl-role {
+    font-size: 1.15rem;
+    margin-bottom: 0.2rem;
+  }
+  .tl-org {
+    color: var(--accent-bright);
+    font-size: 0.92rem;
+    margin-bottom: 0.75rem;
+  }
+  .tl-loc {
+    color: var(--text-muted);
+  }
+  .tl-summary {
+    font-size: 0.92rem;
+    margin-bottom: 0.85rem;
+  }
+  .tl-highlights {
+    display: grid;
+    gap: 0.45rem;
+    margin-bottom: 0.85rem;
+  }
+  .tl-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+  .tl-bullet {
+    margin-top: 0.5rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .tl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+</style>
